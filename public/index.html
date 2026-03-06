@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>iEarn.Bot — AI-Powered Prediction Market Bot</title>
-  <meta name="description" content="Let AI trade Polymarket for you. iEarn.Bot runs locally on your machine — your keys, your funds, your rules. Powered by X402 micropayments." />
+  <meta name="description" content="Let AI trade Polymarket for you. iEarn.Bot runs locally on your machine — your keys, your funds, your rules. Pay-per-use AI strategies via SkillPay." />
   <meta property="og:title" content="iEarn.Bot — AI-Powered Prediction Market Bot" />
   <meta property="og:description" content="Let AI trade Polymarket for you. Local-first, non-custodial, pay-per-use AI strategies." />
   <meta property="og:image" content="https://iearn.bot/og.png" />
@@ -456,8 +456,8 @@
         <div class="out">✅ launchd jobs registered</div>
         <br/>
         <div><span class="prompt">~ $ </span><span class="cmd">python src/strategy_ai.py generate <span style="color:#93c5fd">"BTC breaks 90k, buy YES"</span></span></div>
-        <div class="pay">💳 X402: paying $0.01 USDC → api.iearn.bot ...</div>
-        <div class="ok">✅ Payment confirmed (tx: 0xab3f…)</div>
+        <div class="pay">💳 SkillPay: charged 0.003 USDT · balance: 4.997</div>
+        <div class="ok">✅ Charged — running AI strategy generator...</div>
         <div class="ok">✅ Strategy V4 generated → data/strategies/V4.json</div>
         <br/>
         <div><span class="prompt">~ $ </span><span class="cmd">open http://localhost:7799/?ui=v2</span></div>
@@ -486,8 +486,8 @@
       </div>
       <div class="feature-card">
         <div class="feature-icon">💳</div>
-        <div class="feature-title">X402 Micropayments</div>
-        <div class="feature-desc">Pay per AI call in USDC (~$0.01). No subscription, no registration. HTTP 402 protocol — your bot pays the API automatically, just like buying a vending machine snack.</div>
+        <div class="feature-title">SkillPay — Pay-Per-Use</div>
+        <div class="feature-desc">Top up once with BNB Chain USDT. Each AI strategy call costs ~0.003–0.01 USDT, auto-deducted. No subscription. No signup. 95% goes to the developer.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
@@ -518,47 +518,50 @@
   </div>
 </section>
 
-<!-- X402 SECTION -->
-<section id="x402">
+<!-- SKILLPAY SECTION -->
+<section id="skillpay">
   <div class="container">
     <div class="x402-wrap">
       <div>
-        <div class="section-label">Powered by X402</div>
-        <h2>Pay-per-use AI.<br/>No subscriptions.</h2>
+        <div class="section-label">Powered by SkillPay</div>
+        <h2>Top up once.<br/>Pay per AI call.</h2>
         <p style="color:var(--subtle); margin-bottom:2rem; line-height:1.8;">
-          X402 is Coinbase's open HTTP payment protocol. When iEarn.Bot needs AI,
-          it sends an HTTP request. The server responds with 402 + a USDC payment address.
-          Your bot pays automatically from your Polygon wallet — no accounts, no billing, no bullshit.
+          SkillPay is a BNB Chain billing layer built for AI Skills.
+          Top up your balance once with USDT — iEarn.Bot auto-deducts per call.
+          No accounts, no subscriptions, no credit cards. Just USDT and results.
         </p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
           <div style="background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:.75rem 1.25rem;font-size:.9rem;">
-            <strong style="color:var(--accent)">~$0.01</strong> <span style="color:var(--subtle)">per strategy generation</span>
+            <strong style="color:var(--accent)">~0.003 USDT</strong> <span style="color:var(--subtle)">per AI strategy call</span>
           </div>
           <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:.75rem 1.25rem;font-size:.9rem;">
-            <strong style="color:var(--green)">Polygon USDC</strong> <span style="color:var(--subtle)">instant settlement</span>
+            <strong style="color:var(--green)">BNB Chain USDT</strong> <span style="color:var(--subtle)">instant settlement</span>
           </div>
         </div>
+        <p style="color:var(--muted);font-size:.82rem;margin-top:1.5rem;">
+          No KYC · No registration · 95% revenue to iEarn.Bot developer
+        </p>
       </div>
       <div class="x402-flow">
         <div class="flow-step">
           <span class="flow-arrow">1 →</span>
-          <div class="flow-text"><strong>Bot sends request</strong><br/>POST api.iearn.bot/v1/strategy/generate</div>
+          <div class="flow-text"><strong>You run strategy_ai.py</strong><br/>python src/strategy_ai.py generate "…"</div>
         </div>
         <div class="flow-step">
-          <span class="flow-arrow">2 ←</span>
-          <div class="flow-text"><strong style="color:var(--accent)">HTTP 402 Payment Required</strong><br/>{ amount_usdc: 0.01, to: "0xABC..." }</div>
+          <span class="flow-arrow">2 →</span>
+          <div class="flow-text"><strong>SkillPay auto-deducts</strong><br/>POST /billing/charge → 0.003 USDT deducted</div>
         </div>
         <div class="flow-step">
-          <span class="flow-arrow">3 →</span>
-          <div class="flow-text"><strong>Bot auto-pays USDC</strong><br/>Polygon tx: 0xab3f…c9d2 ✓</div>
+          <span class="flow-arrow">3 ←</span>
+          <div class="flow-text"><strong style="color:var(--green)">AI generates strategy</strong><br/>Claude → JSON strategy rules</div>
         </div>
         <div class="flow-step">
-          <span class="flow-arrow">4 ←</span>
-          <div class="flow-text"><strong style="color:var(--green)">200 OK — Strategy JSON</strong><br/>{ strategy_name, entry_conditions… }</div>
+          <span class="flow-arrow">4 ✓</span>
+          <div class="flow-text"><strong>Strategy saved + deployed</strong><br/>data/strategies/V4.json → bot runs it</div>
         </div>
-        <div class="flow-step">
-          <span class="flow-arrow">5 ✓</span>
-          <div class="flow-text"><strong>Strategy deployed</strong><br/>Saved to data/strategies/V4.json</div>
+        <div class="flow-step" style="background:rgba(249,115,22,.06);border-radius:8px;padding:.5rem .75rem;border-bottom:none!important;">
+          <span class="flow-arrow">💳</span>
+          <div class="flow-text"><strong style="color:var(--accent)">Balance low?</strong><br/>Auto-returns topup link → pay USDT → continue</div>
         </div>
       </div>
     </div>
@@ -592,18 +595,18 @@
       <div class="price-card featured">
         <div class="featured-badge">Most Popular</div>
         <div class="price-tier">Pro</div>
-        <div class="price-amount">~$0.01 <span class="price-unit">/ AI call</span></div>
-        <div class="price-desc">Pay per strategy in USDC. No subscription. No signup.</div>
+        <div class="price-amount">~0.003 <span class="price-unit">USDT / call</span></div>
+        <div class="price-desc">Top up once with BNB USDT. Each AI call auto-deducts. No signup.</div>
         <ul class="price-features">
           <li>Everything in Free</li>
           <li>AI strategy generation</li>
           <li>Custom V4+ strategies</li>
           <li>Strategy optimization</li>
-          <li>X402 auto-payment (Polygon USDC)</li>
-          <li>Natural language → rules</li>
+          <li>SkillPay auto-billing (BNB USDT)</li>
+          <li>Natural language → trading rules</li>
           <li class="dim">Self-hosted AI (own API key)</li>
         </ul>
-        <a href="#install" class="btn-price primary">Start with Pro →</a>
+        <a href="#skillpay" class="btn-price primary">Start with Pro →</a>
       </div>
 
       <div class="price-card">
@@ -664,7 +667,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">Is my private key safe? <span>+</span></div>
-        <div class="faq-a">Yes. Your private key is stored only in a local .env file on your machine, with chmod 600 permissions. iEarn.Bot servers never receive, see, or store your key. When you pay via X402, it's a standard Polygon USDC transfer — same as any on-chain transaction.</div>
+        <div class="faq-a">Yes. Your private key is stored only in a local .env file on your machine, with chmod 600 permissions. iEarn.Bot servers never receive, see, or store your key. SkillPay billing uses your wallet address as a user ID — no signup, no KYC.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What is Polymarket? <span>+</span></div>
