@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" fill="none">
+  <!-- Flame icon -->
+  <g>
+    <!-- Outer flame -->
+    <path d="M24 4 C18 10 10 16 10 26 C10 36 17 44 26 44 C35 44 42 36 42 26 C42 20 39 15 35 11 C35 17 32 21 28 23 C30 18 28 11 24 4Z" fill="#f97316"/>
+    <!-- Inner flame highlight -->
+    <path d="M26 14 C23 18 19 22 19 28 C19 33 22 37 26 37 C30 37 33 33 33 28 C33 24 31 21 29 19 C29 22 27 24 25 25 C26 22 26 18 26 14Z" fill="#fff7ed" opacity="0.6"/>
+    <!-- Small dot accent -->
+    <circle cx="26" cy="38" r="3" fill="#fb923c" opacity="0.8"/>
+  </g>
+
+  <!-- iEarn -->
+  <text x="50" y="36" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="26" fill="#f1f5f9" letter-spacing="-0.5">iEarn</text>
+
+  <!-- dot -->
+  <text x="127" y="36" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="26" fill="#f97316">.</text>
+
+  <!-- Bot -->
+  <text x="136" y="36" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="26" fill="#f97316">Bot</text>
+</svg>
