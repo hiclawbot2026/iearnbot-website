@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "name": "iearnbot-website",
+  "public": true,
+  "outputDirectory": "public",
+  "github": {
+    "silent": true
+  }
+}
