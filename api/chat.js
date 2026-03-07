@@ -18,7 +18,7 @@
 
 const OPENROUTER_API  = 'https://api.aigocode.com/v1/responses'
 const SKILLPAY_API    = 'https://skillpay.me/api/v1/billing'
-const DEFAULT_MODEL   = 'claude-3-5-haiku-20241022'
+const DEFAULT_MODEL   = 'ClaudeMAX'
 const CHARGE_AMOUNT   = 0.01   // USDT per call (our cost ~$0.01, user pays via SkillPay)
 
 // ── CORS headers ──────────────────────────────────────────────────────────
