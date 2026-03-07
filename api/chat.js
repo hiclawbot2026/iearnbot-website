@@ -16,9 +16,9 @@
  *   SKILLPAY_SKILL_ID   — your SkillPay skill ID
  */
 
-const OPENROUTER_API  = 'https://openrouter.ai/api/v1/chat/completions'
+const OPENROUTER_API  = 'https://api.aigocode.com/v1/chat/completions'
 const SKILLPAY_API    = 'https://skillpay.me/api/v1/billing'
-const DEFAULT_MODEL   = 'anthropic/claude-3-haiku'
+const DEFAULT_MODEL   = 'claude-sonnet-4-6'
 const CHARGE_AMOUNT   = 0.01   // USDT per call (our cost ~$0.01, user pays via SkillPay)
 
 // ── CORS headers ──────────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ async function callLLM(messages, model = DEFAULT_MODEL) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${process.env.AIGOCODE_API_KEY}`,
       'HTTP-Referer': 'https://iearn.bot',
       'X-Title': 'iEarn.Bot',
     },
