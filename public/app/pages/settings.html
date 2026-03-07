@@ -1,98 +1,159 @@
-<!-- Settings Page -->
+<!-- Settings Page — Module C (v0.4) -->
 <div class="section-title">Settings</div>
 
-<!-- Server Connection -->
-<div class="card">
-  <div class="card-title" style="margin-bottom:14px">Server Connection</div>
+<div class="settings-list">
 
-  <div class="form-group">
-    <label class="form-label" for="settings-server-url">Server URL</label>
-    <input
-      type="url"
-      id="settings-server-url"
-      class="form-input"
-      placeholder="http://localhost:7799"
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="none"
-      spellcheck="false"
-    />
-    <div class="form-hint">Your iEarnBot server address (Mac mini IP or ngrok URL)</div>
+  <!-- Mac Mini Server -->
+  <div class="settings-section">
+    <div class="settings-label">🖥️ Mac Mini Server</div>
+    <input type="url" id="server-url"
+      placeholder="http://192.168.1.xxx:7799"
+      class="mobile-input" value="" />
+    <div class="settings-hint">Your Mac mini's local IP address. Find it in System Settings → Network.</div>
+    <button class="test-btn" onclick="testConnection()">Test Connection</button>
+    <div id="conn-status" style="margin-top:8px;font-size:.85rem"></div>
   </div>
 
-  <div class="form-group">
-    <label class="form-label" for="settings-api-key">API Key</label>
-    <input
-      type="password"
-      id="settings-api-key"
-      class="form-input"
-      placeholder="Optional — leave blank if not set"
-      autocomplete="current-password"
-    />
-    <div class="form-hint">Set in iEranBot config if authentication is enabled</div>
+  <!-- SkillPay User ID -->
+  <div class="settings-section">
+    <div class="settings-label">💳 SkillPay User ID</div>
+    <input type="text" id="skillpay-id"
+      placeholder="Your Telegram ID or wallet address"
+      class="mobile-input" />
+    <div class="settings-hint">For AI strategy generation billing. Get from <a href="https://skillpay.me" target="_blank" style="color:var(--accent)">skillpay.me</a></div>
   </div>
 
-  <div style="display:flex;gap:10px">
-    <button id="settings-save" class="btn btn-primary" style="flex:2">
-      💾 Save Settings
-    </button>
-    <button id="settings-test" class="btn btn-secondary" style="flex:1">
-      Test Connection
-    </button>
+  <!-- Notifications -->
+  <div class="settings-section">
+    <div class="settings-label">🔔 Notifications</div>
+    <div class="toggle-row">
+      <span>Alert on stop-loss trigger</span>
+      <input type="checkbox" id="notif-stoploss" checked />
+    </div>
+    <div class="toggle-row">
+      <span>Alert on take-profit</span>
+      <input type="checkbox" id="notif-tp" checked />
+    </div>
+    <div class="toggle-row" style="border-bottom:none">
+      <span>Daily P&amp;L summary</span>
+      <input type="checkbox" id="notif-daily" />
+    </div>
   </div>
+
+  <button class="save-btn" onclick="saveSettings()">💾 Save Settings</button>
+
+  <!-- Danger Zone -->
+  <div class="settings-section" style="margin-top:24px">
+    <div class="settings-label" style="color:#ef4444">🔴 Danger Zone</div>
+    <button class="danger-btn" onclick="killSwitchGlobal()">Kill Switch — Stop All Trading</button>
+  </div>
+
+  <div class="app-version">iEarn.Bot v0.4.0 · MIT License</div>
 </div>
-
-<!-- Quick Server Presets -->
-<div class="card">
-  <div class="card-title" style="margin-bottom:12px">Quick Presets</div>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <button class="btn btn-secondary" onclick="setServer('http://localhost:7799')">
-      🖥️ localhost:7799
-    </button>
-    <button class="btn btn-secondary" onclick="document.getElementById('settings-server-url').focus()">
-      🌐 Custom URL…
-    </button>
-  </div>
-</div>
-
-<!-- App Info -->
-<div class="card">
-  <div class="card-title" style="margin-bottom:12px">About</div>
-  <div class="stat-row">
-    <span class="key">App</span>
-    <span class="val">iEarn.Bot PWA</span>
-  </div>
-  <div class="stat-row">
-    <span class="key">Version</span>
-    <span class="val">v0.4.0</span>
-  </div>
-  <div class="stat-row">
-    <span class="key">Cache</span>
-    <span class="val" id="cache-version">iearnbot-v1</span>
-  </div>
-</div>
-
-<!-- Clear Cache -->
-<button class="btn btn-danger" id="clear-cache-btn">
-  🗑️ Clear Cache &amp; Reload
-</button>
-
-<div style="height:8px"></div>
 
 <script>
-function setServer(url) {
-  const input = document.getElementById('settings-server-url')
-  if (input) input.value = url
+// ── Init Settings Page ───────────────────────────────────────────────────
+(function initSettings() {
+  // Restore saved values
+  const serverUrl   = localStorage.getItem('server_url') || ''
+  const skillpayId  = localStorage.getItem('skillpay_user_id') || ''
+  const notifSL     = localStorage.getItem('notif_stoploss') !== 'false'
+  const notifTP     = localStorage.getItem('notif_tp')       !== 'false'
+  const notifDaily  = localStorage.getItem('notif_daily')    === 'true'
+
+  const serverInput   = document.getElementById('server-url')
+  const skillpayInput = document.getElementById('skillpay-id')
+
+  if (serverInput)   serverInput.value   = serverUrl
+  if (skillpayInput) skillpayInput.value = skillpayId
+
+  const slCb = document.getElementById('notif-stoploss')
+  const tpCb = document.getElementById('notif-tp')
+  const dlCb = document.getElementById('notif-daily')
+  if (slCb) slCb.checked = notifSL
+  if (tpCb) tpCb.checked = notifTP
+  if (dlCb) dlCb.checked = notifDaily
+})()
+
+// ── Save Settings ────────────────────────────────────────────────────────
+function saveSettings() {
+  const serverUrl  = document.getElementById('server-url')?.value.trim()    || ''
+  const skillpayId = document.getElementById('skillpay-id')?.value.trim()   || ''
+  const notifSL    = document.getElementById('notif-stoploss')?.checked
+  const notifTP    = document.getElementById('notif-tp')?.checked
+  const notifDaily = document.getElementById('notif-daily')?.checked
+
+  if (serverUrl) localStorage.setItem('server_url', serverUrl)
+  else           localStorage.removeItem('server_url')
+
+  if (skillpayId) localStorage.setItem('skillpay_user_id', skillpayId)
+  else            localStorage.removeItem('skillpay_user_id')
+
+  localStorage.setItem('notif_stoploss', notifSL  ? 'true' : 'false')
+  localStorage.setItem('notif_tp',       notifTP  ? 'true' : 'false')
+  localStorage.setItem('notif_daily',    notifDaily ? 'true' : 'false')
+
+  toast('💾 Settings saved', 'success')
 }
 
-const clearBtn = document.getElementById('clear-cache-btn')
-if (clearBtn) {
-  clearBtn.addEventListener('click', async () => {
-    if ('caches' in window) {
-      const keys = await caches.keys()
-      await Promise.all(keys.map(k => caches.delete(k)))
+// ── Test Connection ──────────────────────────────────────────────────────
+async function testConnection() {
+  const serverInput = document.getElementById('server-url')
+  const statusDiv   = document.getElementById('conn-status')
+  const btn         = document.querySelector('.test-btn')
+
+  const serverUrl = serverInput?.value.trim() || localStorage.getItem('server_url') || 'http://localhost:7799'
+
+  btn.textContent = '⏳ Testing…'
+  btn.disabled = true
+  if (statusDiv) statusDiv.textContent = ''
+
+  try {
+    const r = await fetch(serverUrl.replace(/\/$/, '') + '/api/status', {
+      signal: AbortSignal.timeout(5000)
+    })
+    if (r.ok) {
+      const d = await r.json().catch(() => ({}))
+      const version = d.version ? ` v${d.version}` : ''
+      if (statusDiv) statusDiv.innerHTML =
+        `<span style="color:#22c55e">✅ Connected${version}</span>`
+      toast('✅ Server connected', 'success')
+    } else {
+      throw new Error('HTTP ' + r.status)
     }
-    window.location.reload(true)
-  })
+  } catch (e) {
+    if (statusDiv) statusDiv.innerHTML =
+      `<span style="color:#ef4444">❌ Cannot reach — ${e.message}</span>`
+    toast('❌ Cannot reach server', 'error')
+  } finally {
+    btn.textContent = 'Test Connection'
+    btn.disabled = false
+  }
+}
+
+// ── Kill Switch ──────────────────────────────────────────────────────────
+async function killSwitchGlobal() {
+  const confirmed = confirm(
+    '⚠️ KILL SWITCH\n\nThis will immediately stop ALL trading bots on your Mac mini.\n\nAre you sure?'
+  )
+  if (!confirmed) return
+
+  const serverUrl = localStorage.getItem('server_url') || 'http://localhost:7799'
+
+  try {
+    const r = await fetch(serverUrl.replace(/\/$/, '') + '/api/kill-switch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reason: 'manual_kill_switch_pwa' }),
+      signal: AbortSignal.timeout(8000)
+    })
+    if (r.ok) {
+      toast('🛑 Kill switch activated — all bots stopped', 'success', 5000)
+    } else {
+      toast('Kill switch failed: HTTP ' + r.status, 'error')
+    }
+  } catch (e) {
+    toast('Cannot reach Mac mini: ' + e.message, 'error')
+  }
 }
 </script>

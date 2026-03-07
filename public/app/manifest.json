@@ -2,7 +2,7 @@
   "name": "iEarn.Bot",
   "short_name": "iEarnBot",
   "description": "AI Trading Strategy Manager",
-  "start_url": "/app/",
+  "start_url": "/app/index.html",
   "display": "standalone",
   "background_color": "#080c14",
   "theme_color": "#f97316",

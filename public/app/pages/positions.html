@@ -1,16 +1,44 @@
-<!-- Positions Page -->
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-  <div class="section-title" style="margin-bottom:0">Open Positions</div>
-  <button class="btn btn-secondary" style="width:auto;padding:8px 14px;font-size:13px" onclick="loadPositionsPage()">
+<!-- Positions Page — Module B (v0.4) -->
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+  <div class="section-title" style="margin-bottom:0;">Open Positions</div>
+  <button class="btn btn-secondary" style="width:auto;padding:8px 14px;font-size:13px;" onclick="loadPositions()">
     🔄 Refresh
   </button>
 </div>
 
 <div id="positions-list">
-  <div style="text-align:center;padding:40px">
+  <div style="text-align:center;padding:40px;">
     <div class="spinner"></div>
   </div>
 </div>
 
-<!-- Summary Card -->
-<div id="positions-summary" style="margin-top:16px"></div>
+<!-- Example position card (rendered dynamically) -->
+<!--
+<div class="position-card">
+  <div class="pos-header">
+    <div class="pos-market">BTC/USD > $90k?</div>
+    <div class="pos-side yes">YES</div>
+  </div>
+  <div class="pos-row">
+    <span class="pos-label">Entry</span>
+    <span class="pos-val">$0.45</span>
+  </div>
+  <div class="pos-row">
+    <span class="pos-label">Current</span>
+    <span class="pos-val green">$0.62</span>
+  </div>
+  <div class="pos-row">
+    <span class="pos-label">P&L</span>
+    <span class="pos-val green">+$3.40 (+37.8%)</span>
+  </div>
+  <div class="pos-row">
+    <span class="pos-label">Size</span>
+    <span class="pos-val">$10.00</span>
+  </div>
+  <div class="pos-actions">
+    <button class="btn-sm danger">Stop Loss: 0.30</button>
+    <button class="btn-sm success">Take Profit: 0.80</button>
+  </div>
+</div>
+-->
