@@ -7,7 +7,11 @@
 'use strict';
 
 // ── Config ──────────────────────────────────────────────────
-const API_BASE = 'http://localhost:7799';
+// Dynamic API base from localStorage (set via Settings page)
+function getApiBase() {
+  return (localStorage.getItem('server_url') || 'http://localhost:7799').replace(/\/$/, '');
+}
+const API_BASE = 'http://localhost:7799'; // legacy fallback
 const REFRESH_INTERVAL = 30000; // 30s auto-refresh
 
 // ── State ───────────────────────────────────────────────────
@@ -18,7 +22,7 @@ let currentLogLevel = 'all';
 
 // ── API Helper ──────────────────────────────────────────────
 async function apiFetch(path, opts = {}) {
-  const url = `${API_BASE}${path}`;
+  const url = `${getApiBase()}${path}`;
   const res = await fetch(url, { ...opts, signal: AbortSignal.timeout(8000) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
@@ -47,18 +51,20 @@ async function updateGlobalStatus() {
       apiFetch('/api/status'),
       apiFetch('/api/balance')
     ]);
-    const dot = document.getElementById('global-status-dot');
-    const txt = document.getElementById('global-status-text');
-    const bal = document.getElementById('global-balance');
+    const dot = document.getElementById('status-dot') || document.getElementById('global-status-dot');
+    const txt = document.getElementById('status-label') || document.getElementById('global-status-text');
+    const bal = document.getElementById('balance-display') || document.getElementById('global-balance');
 
     const running = status.running ?? status.status === 'running';
-    dot.className = `status-dot ${running ? 'running' : 'stopped'}`;
-    txt.textContent = running ? 'Running' : 'Stopped';
+    if (dot) dot.className = `status-dot ${running ? 'running' : 'stopped'}`;
+    if (txt) txt.textContent = running ? 'Running' : 'Stopped';
 
-    const amt = parseFloat(balance.balance ?? balance.amount ?? 0).toFixed(2);
-    bal.innerHTML = `$${amt}<span> USDC.e</span>`;
+    if (bal) {
+      const amt = parseFloat(balance.balance ?? balance.amount ?? 0).toFixed(2);
+      bal.innerHTML = `<span>Balance</span> $${amt}`;
+    }
   } catch {
-    const dot = document.getElementById('global-status-dot');
+    const dot = document.getElementById('status-dot') || document.getElementById('global-status-dot');
     if (dot) dot.className = 'status-dot stopped';
   }
 }
@@ -81,8 +87,36 @@ function navigate(page) {
     case 'dashboard':  renderDashboard(); break;
     case 'positions':  renderPositions(); break;
     case 'logs':       renderLogs(); break;
-    case 'settings':   renderSettings(); break;
+    case 'settings':   loadHtmlPage('/app/pages/settings.html'); break;
+    case 'strategy':   loadHtmlPage('/app/pages/strategy.html'); break;
+    default:           renderDashboard(); break;
   }
+}
+
+// ── Load HTML Page Fragment ──────────────────────────────────
+async function loadHtmlPage(url) {
+  const content = document.getElementById('page-content');
+  if (!content) return;
+  content.innerHTML = '<div style="padding:40px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Not found');
+    const html = await res.text();
+    content.innerHTML = html;
+    // Execute inline scripts in the loaded fragment
+    content.querySelectorAll('script').forEach(s => {
+      const ns = document.createElement('script');
+      ns.textContent = s.textContent;
+      document.head.appendChild(ns).remove();
+    });
+  } catch (e) {
+    content.innerHTML = `<div class="empty-state"><span class="empty-icon">⚠️</span><p>Failed to load page</p></div>`;
+  }
+}
+
+// ── Alias toast for pages that use it ───────────────────────
+function toast(msg, type = 'info', durationMs = 3000) {
+  showToast(msg, type, durationMs);
 }
 
 // ════════════════════════════════════════════════════════════
@@ -463,42 +497,11 @@ async function loadLogs() {
 }
 
 // ════════════════════════════════════════════════════════════
-//  PAGE: SETTINGS (placeholder)
+//  PAGE: SETTINGS — loaded via loadHtmlPage('/app/pages/settings.html')
+//  PAGE: STRATEGY  — loaded via loadHtmlPage('/app/pages/strategy.html')
 // ════════════════════════════════════════════════════════════
 
-function renderSettings() {
-  const content = document.getElementById('page-content');
-  content.innerHTML = `
-    <div class="section-title">Settings</div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">API Connection</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">API Base URL</label>
-        <input class="form-input" id="setting-api-url" type="url" placeholder="http://localhost:7799" value="${API_BASE}" />
-        <div class="form-hint">Mac mini iEarnBot dashboard URL</div>
-      </div>
-      <button class="btn btn-primary" onclick="testConnection()">Test Connection</button>
-    </div>
-
-    <div class="card" style="margin-top:12px;">
-      <div class="card-header">
-        <div class="card-title">About</div>
-      </div>
-      <div class="stat-row">
-        <span class="key">Version</span>
-        <span class="val">0.4.0</span>
-      </div>
-      <div class="stat-row">
-        <span class="key">Auto-refresh</span>
-        <span class="val">Every 30s</span>
-      </div>
-    </div>
-  `;
-}
-
+// Legacy testConnection used by older settings page
 async function testConnection() {
   try {
     await apiFetch('/api/status');
