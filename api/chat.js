@@ -16,7 +16,7 @@
  *   SKILLPAY_SKILL_ID   — your SkillPay skill ID
  */
 
-const OPENROUTER_API  = 'https://api.aigocode.com/v1/chat/completions'
+const OPENROUTER_API  = 'https://api.aigocode.com/v1/responses'
 const SKILLPAY_API    = 'https://skillpay.me/api/v1/billing'
 const DEFAULT_MODEL   = 'claude-3-5-haiku-20241022'
 const CHARGE_AMOUNT   = 0.01   // USDT per call (our cost ~$0.01, user pays via SkillPay)
@@ -61,8 +61,23 @@ async function chargeSkillPay(userId, amount = CHARGE_AMOUNT) {
   }
 }
 
-// ── OpenRouter: call LLM ─────────────────────────────────────────────────
+// ── AIGoCode: call LLM via /v1/responses ────────────────────────────────
 async function callLLM(messages, model = DEFAULT_MODEL) {
+  // AIGoCode uses Responses API format
+  const systemMsg = messages.find(m => m.role === 'system')
+  const userMsgs  = messages.filter(m => m.role !== 'system')
+  const input     = userMsgs.map(m => ({
+    role: m.role,
+    content: m.content,
+  }))
+
+  const body = {
+    model,
+    input,
+    ...(systemMsg ? { instructions: systemMsg.content } : {}),
+    max_output_tokens: 1200,
+  }
+
   const res = await fetch(OPENROUTER_API, {
     method: 'POST',
     headers: {
@@ -71,14 +86,25 @@ async function callLLM(messages, model = DEFAULT_MODEL) {
       'HTTP-Referer': 'https://iearn.bot',
       'X-Title': 'iEarn.Bot',
     },
-    body: JSON.stringify({ model, messages, max_tokens: 1200, temperature: 0.3 }),
+    body: JSON.stringify(body),
   })
   if (!res.ok) {
     const err = await res.text()
-    throw new Error(`OpenRouter ${res.status}: ${err.slice(0, 200)}`)
+    throw new Error(`OpenRouter ${res.status}: ${err.slice(0, 300)}`)
   }
   const data = await res.json()
-  const content = data.choices?.[0]?.message?.content || ''
+  // Extract content from Responses API format
+  let content = ''
+  if (data.output) {
+    for (const block of data.output) {
+      if (block.type === 'message' && block.content) {
+        for (const c of block.content) {
+          if (c.type === 'output_text') content += c.text
+        }
+      }
+    }
+  }
+  if (!content) content = data.output_text || data.text || ''
   return { choices: [{ message: { content } }], model: data.model, usage: data.usage }
 }
 
