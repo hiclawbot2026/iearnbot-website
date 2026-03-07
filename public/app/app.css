@@ -195,6 +195,10 @@ body {
   line-height: 1;
 }
 
+.tab-item .tab-label {
+  line-height: 1;
+}
+
 /* ── Cards ── */
 .card {
   background: var(--bg-card);
@@ -1023,3 +1027,12 @@ body {
   padding: 40px 20px;
   font-size: .9rem;
 }
+
+/* ── Language Selector ─────────────────────────────────────────────────── */
+.lang-selector{position:relative}
+.lang-btn{display:flex;align-items:center;gap:3px;background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:4px 8px;border-radius:6px;cursor:pointer;font-size:.75rem;white-space:nowrap}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 6px);background:#131c2e;border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:130px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.lang-menu.open{display:block}
+.lang-option{padding:9px 13px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:8px;transition:background .15s}
+.lang-option:hover{background:rgba(249,115,22,.1);color:#f97316}

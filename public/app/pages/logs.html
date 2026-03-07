@@ -2,15 +2,15 @@
 
 <!-- Filter Pills -->
 <div class="log-filter">
-  <button class="filter-btn active" data-level="all">All</button>
-  <button class="filter-btn" data-level="INFO">INFO</button>
-  <button class="filter-btn" data-level="WARNING">WARN</button>
-  <button class="filter-btn" data-level="ERROR">ERROR</button>
+  <button class="filter-btn active" data-level="all" data-i18n="log_all">All</button>
+  <button class="filter-btn" data-level="INFO" data-i18n="log_info">INFO</button>
+  <button class="filter-btn" data-level="WARNING" data-i18n="log_warn">WARN</button>
+  <button class="filter-btn" data-level="ERROR" data-i18n="log_error">ERROR</button>
 </div>
 
 <!-- Log Output -->
 <div class="log-container" id="log-output">
-  <div style="color:var(--text-muted);text-align:center;padding:20px;">Loading logs…</div>
+  <div style="color:var(--text-muted);text-align:center;padding:20px;" data-i18n="log_empty">No logs yet...</div>
 </div>
 
 <!--

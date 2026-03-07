@@ -1,51 +1,53 @@
 <!-- Settings Page — Module C (v0.4) -->
-<div class="section-title">Settings</div>
+<div class="section-title" data-i18n="tab_settings">Settings</div>
 
 <div class="settings-list">
 
   <!-- Mac Mini Server -->
   <div class="settings-section">
-    <div class="settings-label">🖥️ Mac Mini Server</div>
+    <div class="settings-label" data-i18n="set_server_label">🖥️ Mac Mini Server</div>
     <input type="url" id="server-url"
       placeholder="http://192.168.1.xxx:7799"
+      data-i18n="set_server_placeholder"
       class="mobile-input" value="" />
-    <div class="settings-hint">Your Mac mini's local IP address. Find it in System Settings → Network.</div>
-    <button class="test-btn" onclick="testConnection()">Test Connection</button>
+    <div class="settings-hint" data-i18n="set_server_hint">Your Mac mini's local IP address. Find it in System Settings → Network.</div>
+    <button class="test-btn" onclick="testConnection()" data-i18n="set_test_conn">Test Connection</button>
     <div id="conn-status" style="margin-top:8px;font-size:.85rem"></div>
   </div>
 
   <!-- SkillPay User ID -->
   <div class="settings-section">
-    <div class="settings-label">💳 SkillPay User ID</div>
+    <div class="settings-label" data-i18n="set_skillpay_label">💳 SkillPay User ID</div>
     <input type="text" id="skillpay-id"
       placeholder="Your Telegram ID or wallet address"
+      data-i18n="set_skillpay_placeholder"
       class="mobile-input" />
-    <div class="settings-hint">For AI strategy generation billing. Get from <a href="https://skillpay.me" target="_blank" style="color:var(--accent)">skillpay.me</a></div>
+    <div class="settings-hint" data-i18n="set_skillpay_hint">For AI strategy generation billing. Get from <a href="https://skillpay.me" target="_blank" style="color:var(--accent)">skillpay.me</a></div>
   </div>
 
   <!-- Notifications -->
   <div class="settings-section">
-    <div class="settings-label">🔔 Notifications</div>
+    <div class="settings-label" data-i18n="set_notif_label">🔔 Notifications</div>
     <div class="toggle-row">
-      <span>Alert on stop-loss trigger</span>
+      <span data-i18n="set_notif_stoploss">Alert on stop-loss trigger</span>
       <input type="checkbox" id="notif-stoploss" checked />
     </div>
     <div class="toggle-row">
-      <span>Alert on take-profit</span>
+      <span data-i18n="set_notif_tp">Alert on take-profit</span>
       <input type="checkbox" id="notif-tp" checked />
     </div>
     <div class="toggle-row" style="border-bottom:none">
-      <span>Daily P&amp;L summary</span>
+      <span data-i18n="set_notif_daily">Daily P&amp;L summary</span>
       <input type="checkbox" id="notif-daily" />
     </div>
   </div>
 
-  <button class="save-btn" onclick="saveSettings()">💾 Save Settings</button>
+  <button class="save-btn" onclick="saveSettings()" data-i18n="set_save">💾 Save Settings</button>
 
   <!-- Danger Zone -->
   <div class="settings-section" style="margin-top:24px">
-    <div class="settings-label" style="color:#ef4444">🔴 Danger Zone</div>
-    <button class="danger-btn" onclick="killSwitchGlobal()">Kill Switch — Stop All Trading</button>
+    <div class="settings-label" style="color:#ef4444" data-i18n="set_danger">🔴 Danger Zone</div>
+    <button class="danger-btn" onclick="killSwitchGlobal()" data-i18n="set_kill">Kill Switch — Stop All Trading</button>
   </div>
 
   <div class="app-version">iEarn.Bot v0.4.0 · MIT License</div>
@@ -73,6 +75,9 @@
   if (slCb) slCb.checked = notifSL
   if (tpCb) tpCb.checked = notifTP
   if (dlCb) dlCb.checked = notifDaily
+
+  // Apply i18n after DOM is ready
+  if (typeof applyLang === 'function') applyLang()
 })()
 
 // ── Save Settings ────────────────────────────────────────────────────────
@@ -126,7 +131,7 @@ async function testConnection() {
       `<span style="color:#ef4444">❌ Cannot reach — ${e.message}</span>`
     toast('❌ Cannot reach server', 'error')
   } finally {
-    btn.textContent = 'Test Connection'
+    btn.textContent = t('set_test_conn')
     btn.disabled = false
   }
 }

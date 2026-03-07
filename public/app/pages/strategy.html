@@ -3,26 +3,28 @@
 
 <!-- ── Input Section ── -->
 <div class="input-section card">
-  <div class="input-label">📎 Article / Post URL</div>
+  <div class="input-label" data-i18n="strat_url_label">📎 Article / Post URL</div>
   <input type="url" id="article-url"
     placeholder="Paste X, YouTube, or any link..."
+    data-i18n="strat_url_placeholder"
     class="mobile-input" />
-  <button class="fetch-btn" onclick="fetchArticle()">Fetch Content</button>
+  <button class="fetch-btn" onclick="fetchArticle()" data-i18n="strat_fetch">Fetch Content</button>
 
-  <div class="divider-text">or paste text directly</div>
+  <div class="divider-text" data-i18n="strat_or">or paste text directly</div>
 
   <textarea id="article-text"
     placeholder="Paste article, strategy idea, or describe what you want..."
+    data-i18n="strat_text_placeholder"
     class="mobile-textarea" rows="6"></textarea>
 
-  <div class="input-label" style="margin-top:8px">🌍 Target Market</div>
+  <div class="input-label" style="margin-top:8px" data-i18n="strat_market_label">🌍 Target Market</div>
   <select id="market-select" class="mobile-select">
     <option value="polymarket">Polymarket</option>
     <option value="kalshi">Kalshi (Coming Soon)</option>
     <option value="binance">Binance (Coming Soon)</option>
   </select>
 
-  <button class="generate-btn" onclick="generateStrategy()" id="gen-btn">
+  <button class="generate-btn" onclick="generateStrategy()" id="gen-btn" data-i18n="strat_generate">
     ✨ Generate Strategy
   </button>
 </div>
@@ -37,25 +39,25 @@
 
   <!-- Key Parameters -->
   <div class="param-section">
-    <div class="param-title">⚙️ Key Parameters</div>
+    <div class="param-title" data-i18n="strat_key_params">⚙️ Key Parameters</div>
     <div class="param-grid" id="param-grid"></div>
   </div>
 
   <!-- Risk Controls -->
   <div class="risk-section">
-    <div class="risk-title">🛡️ Risk Controls</div>
+    <div class="risk-title" data-i18n="strat_risk">🛡️ Risk Controls</div>
     <div class="risk-grid" id="risk-grid"></div>
   </div>
 
   <!-- Actions -->
   <div class="result-actions">
-    <button class="action-btn primary" onclick="deployStrategy()">▶ Deploy to Mac</button>
-    <button class="action-btn ghost" onclick="shareStrategy()">📤 Share</button>
+    <button class="action-btn primary" onclick="deployStrategy()" data-i18n="strat_deploy">▶ Deploy to Mac</button>
+    <button class="action-btn ghost" onclick="shareStrategy()" data-i18n="strat_share">📤 Share</button>
   </div>
 </div>
 
 <!-- ── Quick Examples ── -->
-<div class="section-title" style="margin-top:16px">Quick Examples</div>
+<div class="section-title" style="margin-top:16px" data-i18n="strat_examples">Quick Examples</div>
 <div class="card">
   <div style="display:flex;flex-direction:column;gap:8px">
     <button class="btn btn-secondary" onclick="setExample('BTC breaks $90k — buy YES on crypto price markets. Take profit 80¢, stop loss 30¢, max 5 positions, $10 each.')">
@@ -106,6 +108,9 @@ Return ONLY valid JSON, no markdown, no explanation.`
 // ── State ────────────────────────────────────────────────────────────────
 let _lastStrategy = null
 
+// ── Apply i18n to this page after load ──────────────────────────────────
+if (typeof applyLang === 'function') applyLang()
+
 // ── Set example text ─────────────────────────────────────────────────────
 function setExample(text) {
   document.getElementById('article-text').value = text
@@ -139,7 +144,7 @@ async function fetchArticle() {
   } catch (e) {
     toast('Fetch failed — paste text manually', 'info')
   } finally {
-    btn.textContent = 'Fetch Content'
+    btn.textContent = t('strat_fetch')
     btn.disabled = false
   }
 }
@@ -180,7 +185,7 @@ async function generateStrategy() {
   if (!content.trim()) {
     toast('No content to process', 'error')
     btn.disabled = false
-    btn.textContent = '✨ Generate Strategy'
+    btn.textContent = t('strat_generate')
     return
   }
 
@@ -222,7 +227,7 @@ async function generateStrategy() {
     toast('Network error: ' + e.message, 'error')
   } finally {
     btn.disabled = false
-    btn.textContent = '✨ Generate Strategy'
+    btn.textContent = t('strat_generate')
   }
 }
 

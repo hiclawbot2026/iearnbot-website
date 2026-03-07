@@ -4,7 +4,7 @@
 <div class="status-bar card" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;margin-bottom:12px;">
   <div class="status-item">
     <div class="status-dot connecting" id="dash-status-dot"></div>
-    <span id="dash-status-text" style="font-size:13px;font-weight:600;">Connecting…</span>
+    <span id="dash-status-text" style="font-size:13px;font-weight:600;" data-i18n="dash_connecting">Connecting…</span>
   </div>
   <div class="balance" id="dash-balance">
     $<span id="dash-balance-amt">—</span> <span class="unit">USDC.e</span>
@@ -14,25 +14,25 @@
 <!-- KPI Cards -->
 <div class="kpi-row">
   <div class="kpi-card">
-    <div class="kpi-label">Today P&amp;L</div>
+    <div class="kpi-label" data-i18n="dash_today_pnl">Today P&amp;L</div>
     <div class="kpi-value green" id="kpi-today-pnl">+$0.00</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">Open Positions</div>
+    <div class="kpi-label" data-i18n="dash_open_pos">Open Positions</div>
     <div class="kpi-value" id="kpi-positions">0</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">Win Rate</div>
+    <div class="kpi-label" data-i18n="dash_win_rate">Win Rate</div>
     <div class="kpi-value" id="kpi-winrate">—</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-label">Total P&amp;L</div>
+    <div class="kpi-label" data-i18n="dash_total_pnl">Total P&amp;L</div>
     <div class="kpi-value" id="kpi-total-pnl">$0.00</div>
   </div>
 </div>
 
 <!-- Active Strategies -->
-<div class="section-title" style="margin-top:8px;">Active Strategies</div>
+<div class="section-title" style="margin-top:8px;" data-i18n="dash_active">Active Strategies</div>
 <div id="strategy-list">
   <div class="empty-state" style="padding:24px 16px;">
     <div class="spinner"></div>
@@ -41,6 +41,6 @@
 
 <!-- Quick Actions -->
 <div class="action-row">
-  <button class="action-btn danger" onclick="killSwitch()">🔴 Kill Switch</button>
-  <button class="action-btn primary" onclick="refreshData()">🔄 Refresh</button>
+  <button class="action-btn danger" onclick="killSwitch()" data-i18n="dash_kill">🔴 Kill Switch</button>
+  <button class="action-btn primary" onclick="refreshData()" data-i18n="dash_refresh">🔄 Refresh</button>
 </div>
