@@ -16,7 +16,7 @@
  *   SKILLPAY_SKILL_ID   — your SkillPay skill ID
  */
 
-const OPENROUTER_API  = 'https://api.aigocode.com/v1/chat/completions'
+const OPENROUTER_API  = 'https://api.aigocode.com/v1/responses'
 const SKILLPAY_API    = 'https://skillpay.me/api/v1/billing'
 const DEFAULT_MODEL   = 'claude-sonnet-4-6'
 const CHARGE_AMOUNT   = 0.01   // USDT per call (our cost ~$0.01, user pays via SkillPay)
@@ -61,8 +61,20 @@ async function chargeSkillPay(userId, amount = CHARGE_AMOUNT) {
   }
 }
 
-// ── OpenRouter: call LLM ──────────────────────────────────────────────────
+// ── AIGoCode: call LLM (Responses API) ───────────────────────────────────
 async function callLLM(messages, model = DEFAULT_MODEL) {
+  // Convert chat messages to AIGoCode Responses API format
+  const systemMsg = messages.find(m => m.role === 'system')
+  const userMsgs  = messages.filter(m => m.role !== 'system')
+  const input     = userMsgs.map(m => m.content).join('\n')
+
+  const body = {
+    model,
+    input,
+    ...(systemMsg ? { instructions: systemMsg.content } : {}),
+    max_output_tokens: 1200,
+  }
+
   const res = await fetch(OPENROUTER_API, {
     method: 'POST',
     headers: {
@@ -71,13 +83,19 @@ async function callLLM(messages, model = DEFAULT_MODEL) {
       'HTTP-Referer': 'https://iearn.bot',
       'X-Title': 'iEarn.Bot',
     },
-    body: JSON.stringify({ model, messages, max_tokens: 1200, temperature: 0.3 }),
+    body: JSON.stringify(body),
   })
   if (!res.ok) {
     const err = await res.text()
     throw new Error(`OpenRouter ${res.status}: ${err.slice(0, 200)}`)
   }
-  return res.json()
+  const data = await res.json()
+  // Extract text from Responses API output
+  const content = data.output?.find(o => o.type === 'message')
+    ?.content?.find(c => c.type === 'output_text')?.text
+    || data.output_text
+    || ''
+  return { choices: [{ message: { content } }], model: data.model, usage: data.usage }
 }
 
 // ── Main handler ──────────────────────────────────────────────────────────
