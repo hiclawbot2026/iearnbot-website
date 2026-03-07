@@ -1,0 +1,38 @@
+<!-- Strategy Page -->
+<div class="section-title">AI Strategy Generator</div>
+
+<div class="card">
+  <div class="card-title" style="margin-bottom:10px">Describe your strategy</div>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;line-height:1.6">
+    Paste an article, describe a trading idea, or enter a URL. The AI will generate a structured strategy config.
+  </p>
+  <textarea
+    id="strategy-prompt"
+    class="strategy-textarea"
+    placeholder="e.g. Buy BTC when RSI is below 30 and volume spikes 2x average. Exit at 5% profit or 3% loss.&#10;&#10;Or paste a news article about a market opportunity..."
+  ></textarea>
+  <div style="margin-top:12px">
+    <button id="strategy-generate" class="btn btn-primary">
+      🤖 Generate Strategy
+    </button>
+  </div>
+</div>
+
+<!-- Result -->
+<div id="strategy-result"></div>
+
+<!-- Recent Strategies -->
+<div class="section-title" style="margin-top:4px">Quick Examples</div>
+<div class="card">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <button class="btn btn-secondary" onclick="document.getElementById('strategy-prompt').value='Buy ETH when price drops 5% in 1 hour and RSI < 35. Take profit at 3%, stop loss at 2%.'">
+      📉 Mean Reversion
+    </button>
+    <button class="btn btn-secondary" onclick="document.getElementById('strategy-prompt').value='Follow Bitcoin trend. Buy when 1h MA crosses above 4h MA. Sell when it crosses below. Max position 10% of balance.'">
+      📈 Trend Following
+    </button>
+    <button class="btn btn-secondary" onclick="document.getElementById('strategy-prompt').value='Market-neutral: Long the underperforming token in BTC/ETH pair when spread exceeds 2 standard deviations. Exit when spread normalizes.'">
+      ⚖️ Pairs Trading
+    </button>
+  </div>
+</div>

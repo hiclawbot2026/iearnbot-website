@@ -1,0 +1,56 @@
+<!-- Dashboard Page -->
+<div class="section-title">Overview</div>
+
+<!-- Balance Card -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Total Balance</span>
+    <span class="badge badge-orange" id="dash-status-badge">—</span>
+  </div>
+  <div id="dash-balance" class="big-num">$—</div>
+  <div class="sub-label">Available on exchange</div>
+</div>
+
+<!-- P&L Grid -->
+<div class="pnl-grid">
+  <div class="pnl-item">
+    <div class="card-title" style="margin-bottom:8px">Today P&amp;L</div>
+    <div id="dash-pnl-day" class="big-num" style="font-size:1.5rem">—</div>
+  </div>
+  <div class="pnl-item">
+    <div class="card-title" style="margin-bottom:8px">Total P&amp;L</div>
+    <div id="dash-pnl-all" class="big-num" style="font-size:1.5rem">—</div>
+  </div>
+</div>
+
+<!-- Stats Card -->
+<div class="card">
+  <div class="card-title" style="margin-bottom:12px">Stats</div>
+  <div class="stat-row">
+    <span class="key">Open Positions</span>
+    <span class="val" id="dash-pos-count">—</span>
+  </div>
+  <div class="stat-row">
+    <span class="key">Win Rate</span>
+    <span class="val" id="dash-win-rate">—</span>
+  </div>
+  <div class="stat-row">
+    <span class="key">Server</span>
+    <span class="val" id="dash-server" style="font-size:11px;word-break:break-all">—</span>
+  </div>
+</div>
+
+<!-- Open Positions Preview -->
+<div class="section-title" style="margin-top:4px">Open Positions</div>
+<div id="dash-positions">
+  <div class="empty-state">
+    <span class="empty-icon">💼</span>
+    <p>Loading positions…</p>
+  </div>
+</div>
+
+<script>
+  // Show server URL in stats
+  const serverEl = document.getElementById('dash-server')
+  if (serverEl) serverEl.textContent = localStorage.getItem('server_url') || 'localhost:7799'
+</script>

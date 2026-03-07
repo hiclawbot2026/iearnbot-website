@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="iEarnBot" />
+  <meta name="theme-color" content="#f97316" />
+  <meta name="description" content="AI Trading Strategy Manager" />
+
+  <title>iEarn.Bot</title>
+
+  <link rel="manifest" href="/app/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="stylesheet" href="/app/app.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Top Status Bar ── -->
+    <header class="top-bar">
+      <div class="top-bar__brand">
+        <img src="/logo.svg" alt="iEarnBot" class="top-bar__logo" onerror="this.style.display='none'" />
+        <span class="top-bar__title">iEarn.Bot</span>
+      </div>
+      <div class="top-bar__status">
+        <div class="status-badge">
+          <div id="status-dot" class="status-dot"></div>
+          <span id="status-label">Unknown</span>
+        </div>
+        <div id="balance-display" class="balance-display">
+          <span>Balance</span> —
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Page Content ── -->
+    <main id="page-content">
+      <!-- Loaded dynamically by app.js -->
+      <div style="padding:60px;text-align:center">
+        <div class="spinner"></div>
+      </div>
+    </main>
+
+    <!-- ── Toast Container ── -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ── Bottom Tab Bar ── -->
+    <nav class="tab-bar">
+      <div class="tab-item active" data-page="dashboard">
+        <span class="icon">📊</span>
+        <span class="label">Dashboard</span>
+      </div>
+      <div class="tab-item" data-page="strategy">
+        <span class="icon">🤖</span>
+        <span class="label">Strategy</span>
+      </div>
+      <div class="tab-item" data-page="positions">
+        <span class="icon">💼</span>
+        <span class="label">Positions</span>
+      </div>
+      <div class="tab-item" data-page="logs">
+        <span class="icon">📋</span>
+        <span class="label">Logs</span>
+      </div>
+      <div class="tab-item" data-page="settings">
+        <span class="icon">⚙️</span>
+        <span class="label">Settings</span>
+      </div>
+    </nav>
+
+  </div>
+
+  <script src="/app/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!-- Logs Page -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+  <div class="section-title" style="margin-bottom:0">Bot Logs</div>
+  <button class="btn btn-secondary" style="width:auto;padding:8px 14px;font-size:13px" onclick="loadLogsPage()">
+    🔄 Refresh
+  </button>
+</div>
+
+<!-- Filter Pills -->
+<div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px">
+  <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;flex-shrink:0" onclick="filterLogs('all')">All</button>
+  <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;flex-shrink:0;color:var(--red)" onclick="filterLogs('error')">Errors</button>
+  <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;flex-shrink:0;color:#eab308" onclick="filterLogs('warn')">Warnings</button>
+  <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;flex-shrink:0;color:var(--green)" onclick="filterLogs('success')">Success</button>
+</div>
+
+<div class="card" style="padding:0">
+  <div id="logs-list" style="padding:12px">
+    <div style="text-align:center;padding:24px">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function filterLogs(level) {
+  const items = document.querySelectorAll('.log-item')
+  items.forEach(item => {
+    if (level === 'all') {
+      item.style.display = ''
+    } else {
+      const lvl = item.querySelector('.log-level')
+      item.style.display = (lvl && lvl.classList.contains(level)) ? '' : 'none'
+    }
+  })
+}
+</script>
