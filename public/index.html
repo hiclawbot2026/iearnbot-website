@@ -100,7 +100,19 @@
     .btp.pri:hover{background:var(--accent2)}
     .btp.ghost{border:1px solid var(--border);color:var(--text)}
     .btp.ghost:hover{border-color:var(--accent);color:var(--accent)}
-    /* TERMINAL */
+    /* DOWNLOAD */
+    .dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:2.5rem}
+    .dl-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:.75rem;transition:all .2s}
+    .dl-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .dl-icon{font-size:2rem}
+    .dl-title{font-size:1.05rem;font-weight:700}
+    .dl-sub{color:var(--subtle);font-size:.85rem;flex:1}
+    .dl-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;text-decoration:none;padding:.6rem 1.3rem;border-radius:8px;font-weight:600;font-size:.875rem;transition:background .2s;margin-top:.5rem}
+    .dl-btn:hover{background:var(--accent2)}
+    .dl-btn.ghost{background:transparent;border:1px solid var(--border);color:var(--subtle);cursor:default}
+    .dl-badge{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .6rem;border-radius:99px;margin-left:.5rem}
+    .badge-soon{background:rgba(148,163,184,.12);color:var(--subtle)}
+    .badge-ready{background:rgba(34,197,94,.12);color:var(--green)}
     .term{background:#0a0e18;border:1px solid var(--border);border-radius:16px;overflow:hidden}
     .thdr{background:#111827;padding:.75rem 1rem;display:flex;gap:.5rem;align-items:center}
     .dot{width:12px;height:12px;border-radius:50%}
@@ -148,6 +160,7 @@
   <div class="nav-links">
     <a href="#how"      data-i18n="nav_how">How it works</a>
     <a href="#features" data-i18n="nav_feat">Features</a>
+    <a href="#download" data-i18n="nav_dl">Download</a>
     <a href="#pricing"  data-i18n="nav_price">Pricing</a>
     <a href="https://github.com/iearnbot/iearnbot" target="_blank">GitHub</a>
     <div class="lang-sw">
@@ -166,7 +179,7 @@
     <h1 data-i18n-h="h1">Let AI trade<br/><span class="ac">any market</span><br/>for you</h1>
     <p class="hero-sub" data-i18n="hero_sub">iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Paste an article link — AI generates a full strategy with risk controls and runs it automatically.</p>
     <div class="hero-cta">
-      <a href="#pricing" class="btn-p" data-i18n="cta1">🔥 Get iEarn.Bot</a>
+      <a href="#download" class="btn-p" data-i18n="cta1">⬇ Download iEarn.Bot</a>
       <a href="https://github.com/iearnbot/iearnbot" class="btn-s" target="_blank" data-i18n="cta2">★ Star on GitHub</a>
     </div>
     <div class="stats">
@@ -318,6 +331,41 @@
   </div>
 </section>
 
+<!-- DOWNLOAD -->
+<section id="download">
+  <div class="container">
+    <div class="sec-lbl" data-i18n="dl_lbl">Download</div>
+    <h2 data-i18n-h="dl_h2">Get iEarn.Bot<br/>for your platform</h2>
+    <p class="sec-sub" data-i18n="dl_sub">Run locally on your machine. Your keys never leave your device.</p>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-icon">🍎</div>
+        <div class="dl-title">macOS <span class="dl-badge badge-ready">Ready</span></div>
+        <div class="dl-sub" data-i18n="dl_mac">Apple Silicon (M1/M2/M3) + Intel. Drag to Applications and launch.</div>
+        <a href="https://github.com/iEarnBot/iEarnBot/releases/latest/download/iEarn.Bot-arm64.dmg" class="dl-btn" data-i18n="dl_mac_btn">⬇ Download .dmg</a>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon">🪟</div>
+        <div class="dl-title">Windows <span class="dl-badge badge-soon">Coming Soon</span></div>
+        <div class="dl-sub" data-i18n="dl_win">Windows 10/11 installer (.exe). One-click setup.</div>
+        <span class="dl-btn ghost" data-i18n="dl_win_btn">⬇ Download .exe</span>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon">🧩</div>
+        <div class="dl-title">OpenClaw Skill <span class="dl-badge badge-ready">Ready</span></div>
+        <div class="dl-sub" data-i18n="dl_skill">For advanced users with OpenClaw installed. Full AI agent integration.</div>
+        <a href="https://github.com/iEarnBot/iEarnBot/raw/main/skills/iearnbot.skill" class="dl-btn" data-i18n="dl_skill_btn">⬇ Download .skill</a>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon">🐧</div>
+        <div class="dl-title">Linux / CLI <span class="dl-badge badge-ready">Ready</span></div>
+        <div class="dl-sub" data-i18n="dl_cli">Command-line setup via git clone + bash setup.sh. macOS &amp; Linux.</div>
+        <a href="https://github.com/iEarnBot/iEarnBot" class="dl-btn" target="_blank" data-i18n="dl_cli_btn">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- INSTALL -->
 <section id="install">
   <div class="container" style="max-width:760px">
@@ -369,6 +417,7 @@
   </a>
   <div class="flinks">
     <a href="https://github.com/iearnbot/iearnbot" target="_blank">GitHub</a>
+    <a href="#download" data-i18n="nav_dl">Download</a>
     <a href="#features" data-i18n="nav_feat">Features</a>
     <a href="#pricing"  data-i18n="nav_price">Pricing</a>
     <a href="#faq"      data-i18n="faq_lbl">FAQ</a>
@@ -384,12 +433,22 @@ const T = {
     badge:"v0.4 · Multi-Market · Polymarket · Polygon",
     h1:'Let AI trade<br/><span class="ac">any market</span><br/>for you',
     hero_sub:"iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Paste an article link — AI generates a full strategy with risk controls and runs it automatically.",
-    cta1:"🔥 Get iEarn.Bot", cta2:"★ Star on GitHub",
+    cta1:"⬇ Download iEarn.Bot", cta2:"★ Star on GitHub",
     s1:"Built-in Strategies", s2:"Markets Supported", s3:"Non-Custodial", s4:"Open Source",
     how_lbl:"How it works", how_h2:"From install to profit<br/>in 5 minutes",
     how_sub:"No cloud accounts. No seed phrase uploads. Everything runs on your Mac or Linux machine.",
     st1t:"Install in one command", st1d:"Run the setup script. It installs dependencies, sets up your .env, and registers auto-start jobs.",
     st2t:"Connect your wallet", st2d:"Paste your API key or private key locally. We never see it. Supports Polymarket, crypto exchanges, futures & stock markets.",
+    dl_lbl:"Download", dl_h2:"Get iEarn.Bot<br/>for your platform", dl_sub:"Run locally on your machine. Your keys never leave your device.",
+    dl_mac:"Apple Silicon (M1/M2/M3) + Intel. Drag to Applications and launch.",
+    dl_mac_btn:"⬇ Download .dmg",
+    dl_win:"Windows 10/11 installer (.exe). One-click setup.",
+    dl_win_btn:"⬇ Download .exe",
+    dl_skill:"For OpenClaw users. Full AI agent integration.",
+    dl_skill_btn:"⬇ Download .skill",
+    dl_cli:"Command-line setup via git clone + bash setup.sh.",
+    dl_cli_btn:"View on GitHub →",
+    nav_dl:"Download",
     st3t:"Paste an article — AI builds your strategy", st3d:"Paste a link from X or YouTube, or paste text directly. AI reads it and generates a full strategy with risk controls and a visual parameter editor.",
     st4t:"Watch the Dashboard", st4d:"Open http://localhost:7799 in your browser. See P&L, positions, and strategy health in real time.",
     feat_lbl:"Features", feat_h2:"Everything you need<br/>to trade smarter",
@@ -433,11 +492,11 @@ const T = {
     footer:"© 2026 iEarn.Bot — MIT License — Built with ❤️ and USDC"
   },
   zh: {
-    nav_how:"使用流程", nav_feat:"功能特性", nav_price:"价格", nav_cta:"立即开始 →",
+    nav_how:"使用流程", nav_feat:"功能特性", nav_dl:"下载", nav_price:"价格", nav_cta:"立即开始 →",
     badge:"v0.4 · 多市场 · Polymarket · Polygon",
     h1:'让 AI 替你交易<br/><span class="ac">任意市场</span>',
     hero_sub:"iEarn.Bot 在你本地运行。私钥归你、资金归你、规则归你。粘贴一篇文章链接——AI 自动生成含风控的完整策略并执行。",
-    cta1:"🔥 获取 iEarn.Bot", cta2:"★ GitHub Star",
+    cta1:"⬇ 下载 iEarn.Bot", cta2:"★ GitHub Star",
     s1:"内置策略数", s2:"支持市场", s3:"非托管", s4:"开源",
     how_lbl:"使用流程", how_h2:"5 分钟内<br/>从安装到运行",
     how_sub:"无需云账户，无需上传助记词。一切在你的 Mac 或 Linux 上本地运行。",
@@ -486,11 +545,11 @@ const T = {
     footer:"© 2026 iEarn.Bot — MIT 许可证 — 用 ❤️ 和 USDC 构建"
   },
   ja: {
-    nav_how:"使い方", nav_feat:"機能", nav_price:"料金", nav_cta:"今すぐ始める →",
+    nav_how:"使い方", nav_feat:"機能", nav_dl:"ダウンロード", nav_price:"料金", nav_cta:"今すぐ始める →",
     badge:"v0.4 · マルチマーケット · Polymarket · Polygon",
     h1:'AIに<span class="ac">あらゆる市場</span>を<br/>取引させよう',
     hero_sub:"iEarn.Bot はあなたのマシン上でローカルに動作します。鍵もあなたのもの、資金もあなたのもの、ルールもあなたのもの。記事リンクを貼るだけ——AIがリスク管理付きの完全な戦略を生成・実行します。",
-    cta1:"🔥 iEarn.Botを入手", cta2:"★ GitHubでスター",
+    cta1:"⬇ iEarn.Botをダウンロード", cta2:"★ GitHubでスター",
     s1:"内蔵戦略数", s2:"対応マーケット", s3:"非カストディアル", s4:"オープンソース",
     how_lbl:"使い方", how_h2:"インストールから稼働まで<br/>5分",
     how_sub:"クラウドアカウント不要。シードフレーズのアップロード不要。すべてあなたのMacまたはLinux上で動作します。",
