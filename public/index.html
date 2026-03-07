@@ -162,16 +162,16 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge"><div class="dp"></div><span data-i18n="badge">Now live on Polymarket · Polygon</span></div>
-    <h1 data-i18n-h="h1">Let AI trade<br/><span class="ac">prediction markets</span><br/>for you</h1>
-    <p class="hero-sub" data-i18n="hero_sub">iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Describe a strategy in plain English — AI builds and runs it automatically.</p>
+    <div class="hero-badge"><div class="dp"></div><span data-i18n="badge">v0.4 · Multi-Market · Polymarket · Polygon</span></div>
+    <h1 data-i18n-h="h1">Let AI trade<br/><span class="ac">any market</span><br/>for you</h1>
+    <p class="hero-sub" data-i18n="hero_sub">iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Paste an article link — AI generates a full strategy with risk controls and runs it automatically.</p>
     <div class="hero-cta">
       <a href="#pricing" class="btn-p" data-i18n="cta1">🔥 Get iEarn.Bot</a>
       <a href="https://github.com/iearnbot/iearnbot" class="btn-s" target="_blank" data-i18n="cta2">★ Star on GitHub</a>
     </div>
     <div class="stats">
-      <div><div class="snum">3+</div><div class="slbl" data-i18n="s1">Built-in Strategies</div></div>
-      <div><div class="snum">~$0.01</div><div class="slbl" data-i18n="s2">Per AI Strategy</div></div>
+      <div><div class="snum">7+</div><div class="slbl" data-i18n="s1">Built-in Strategies</div></div>
+      <div><div class="snum">∞</div><div class="slbl" data-i18n="s2">Markets Supported</div></div>
       <div><div class="snum">100%</div><div class="slbl" data-i18n="s3">Non-Custodial</div></div>
       <div><div class="snum">MIT</div><div class="slbl" data-i18n="s4">Open Source</div></div>
     </div>
@@ -186,8 +186,8 @@
     <p class="sec-sub" data-i18n="how_sub">No cloud accounts. No seed phrase uploads. Everything runs on your Mac or Linux machine.</p>
     <div class="steps">
       <div class="sc"><div class="snum2">01</div><span class="si">⚡</span><div class="st" data-i18n="st1t">Install in one command</div><div class="sd" data-i18n="st1d">Run the setup script. It installs dependencies, sets up your .env, and registers auto-start jobs.</div></div>
-      <div class="sc"><div class="snum2">02</div><span class="si">💼</span><div class="st" data-i18n="st2t">Connect your wallet</div><div class="sd" data-i18n="st2d">Paste your Polygon private key locally. We never see it. Approve Polymarket contracts once (~$0.01 gas).</div></div>
-      <div class="sc"><div class="snum2">03</div><span class="si">🤖</span><div class="st" data-i18n="st3t">Pick or create a strategy</div><div class="sd" data-i18n="st3d">Use built-in V1/V2/V3 strategies, or describe your own in plain English — AI generates the rules.</div></div>
+      <div class="sc"><div class="snum2">02</div><span class="si">💼</span><div class="st" data-i18n="st2t">Connect your wallet</div><div class="sd" data-i18n="st2d">Paste your API key or private key locally. We never see it. Supports Polymarket, crypto exchanges, futures &amp; stock markets.</div></div>
+      <div class="sc"><div class="snum2">03</div><span class="si">🤖</span><div class="st" data-i18n="st3t">Paste an article — AI builds your strategy</div><div class="sd" data-i18n="st3d">Paste a link from X or YouTube, or paste text directly. AI reads it and generates a full strategy with risk controls and a visual parameter editor.</div></div>
       <div class="sc"><div class="snum2">04</div><span class="si">📊</span><div class="st" data-i18n="st4t">Watch the Dashboard</div><div class="sd" data-i18n="st4d">Open http://localhost:7799 in your browser. See P&amp;L, positions, and strategy health in real time.</div></div>
     </div>
   </div>
@@ -203,9 +203,12 @@
         <div class="out">✅ Python 3.12, uv 0.5 — ready</div>
         <div class="out">✅ Dependencies installed &amp; .env configured</div>
         <div class="out">✅ launchd jobs registered</div><br/>
-        <div><span class="pr">~ $ </span><span class="cmd">python src/strategy_ai.py generate <span style="color:#93c5fd">"BTC breaks 90k, buy YES"</span></span></div>
+        <div><span class="pr">~ $ </span><span class="cmd">python src/strategy_ai.py generate-v2 <span style="color:#93c5fd">"https://x.com/trader/status/123"</span></span></div>
+        <div class="out">📄 Fetching article content…</div>
         <div class="pay">💳 SkillPay: charged 0.01 USDT · balance: 4.99</div>
-        <div class="ok">✅ Strategy V4 generated → data/strategies/V4.json</div><br/>
+        <div class="ok">✅ Strategy V4 + params.yaml → data/strategies/V4.json</div><br/>
+        <div><span class="pr">~ $ </span><span class="cmd">python src/scheduler.py add v4 interval 15 minutes</span></div>
+        <div class="ok">✅ Scheduled: V4 runs every 15 minutes</div><br/>
         <div><span class="pr">~ $ </span><span class="cmd">open http://localhost:7799/?ui=v2</span></div>
         <div class="cmt"># Dashboard opens in browser</div>
       </div>
@@ -221,13 +224,14 @@
     <p class="sec-sub" data-i18n="feat_sub">Built for traders who want automation without giving up control.</p>
     <div class="fg">
       <div class="fc"><div class="fi">🔐</div><div class="ft" data-i18n="f1t">100% Non-Custodial</div><div class="fd" data-i18n="f1d">Your private key never leaves your machine. Stored in a local .env file with chmod 600. We literally cannot touch your funds.</div></div>
-      <div class="fc"><div class="fi">🤖</div><div class="ft" data-i18n="f2t">AI Strategy Generation</div><div class="fd" data-i18n="f2d">Describe a strategy in plain English. Claude generates structured entry/exit rules, risk parameters, and market filters — ready to deploy instantly.</div></div>
+      <div class="fc"><div class="fi">🤖</div><div class="ft" data-i18n="f2t">AI Strategy from Any Article</div><div class="fd" data-i18n="f2d">Paste an X post, YouTube link, or any text. AI reads it and generates a full strategy with entry/exit rules, risk parameters and a visual parameter editor — ready to deploy instantly.</div></div>
       <div class="fc"><div class="fi">💳</div><div class="ft" data-i18n="f3t">SkillPay — Pay-Per-Use</div><div class="fd" data-i18n="f3d">Top up once with BNB Chain USDT. Each AI call costs ~0.01 USDT, auto-deducted. No subscription. No signup. 95% goes to the developer.</div></div>
       <div class="fc"><div class="fi">📊</div><div class="ft" data-i18n="f4t">Live Dashboard</div><div class="fd" data-i18n="f4d">Beautiful v2 dashboard at localhost:7799. KPI cards, position tracking, daily P&amp;L, strategy health — all in your browser, no cloud needed.</div></div>
-      <div class="fc"><div class="fi">⚙️</div><div class="ft" data-i18n="f5t">3 Built-in Strategies</div><div class="fd" data-i18n="f5d">V1 (BTC momentum), V2 (leaderboard copy), V3 (custom wallet tracking). Run free forever — no AI credits needed.</div></div>
+      <div class="fc"><div class="fi">🌍</div><div class="ft" data-i18n="f5t">Any Market, One Framework</div><div class="fd" data-i18n="f5d">Submit any market URL — AI auto-generates a plug-in adapter. Supports Polymarket, crypto, futures, options, and stock markets worldwide.</div></div>
       <div class="fc"><div class="fi">🧬</div><div class="ft" data-i18n="f6t">Self-Evolving Strategies</div><div class="fd" data-i18n="f6d">Built-in evolution engine analyzes wins/losses, auto-adjusts stop-loss levels, disables losing market types, and raises liquidity thresholds.</div></div>
-      <div class="fc"><div class="fi">🛡️</div><div class="ft" data-i18n="f7t">Stop-Loss &amp; Take-Profit</div><div class="fd" data-i18n="f7d">Fully configurable per-strategy. Automatic MERGE/REDEEM on resolve. Runs every 5 minutes in the background, 24/7.</div></div>
-      <div class="fc"><div class="fi">🌐</div><div class="ft" data-i18n="f8t">Open Source, MIT</div><div class="fd" data-i18n="f8d">Full source on GitHub. Audit the code yourself. Fork it, extend it, build on top of it. No black boxes.</div></div>
+      <div class="fc"><div class="fi">🛡️</div><div class="ft" data-i18n="f7t">Full Risk Controls</div><div class="fd" data-i18n="f7d">Max position, max daily loss, max drawdown, trailing stop, cooldown period, order size limits, and one-click kill-switch. All configurable per strategy.</div></div>
+      <div class="fc"><div class="fi">⏱️</div><div class="ft" data-i18n="f8t">Flexible Scheduling</div><div class="fd" data-i18n="f8d">Run strategies manually or on a schedule: every N minutes, hours, days, weeks, or months. APScheduler-powered with kill-switch integration and state persistence.</div></div>
+      <div class="fc"><div class="fi">🌐</div><div class="ft" data-i18n="f9t">Open Source, MIT</div><div class="fd" data-i18n="f9d">Full source on GitHub. Audit the code yourself. Fork it, extend it, build on top of it. No black boxes.</div></div>
     </div>
   </div>
 </section>
@@ -377,28 +381,28 @@
 // ── i18n translations ──────────────────────────────────────────────────────
 const T = {
   en: {
-    nav_how:"How it works", nav_feat:"Features", nav_price:"Pricing", nav_cta:"Get Started →",
-    badge:"Now live on Polymarket · Polygon",
-    h1:'Let AI trade<br/><span class="ac">prediction markets</span><br/>for you',
-    hero_sub:"iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Describe a strategy in plain English — AI builds and runs it automatically.",
+    badge:"v0.4 · Multi-Market · Polymarket · Polygon",
+    h1:'Let AI trade<br/><span class="ac">any market</span><br/>for you',
+    hero_sub:"iEarn.Bot runs locally on your machine. Your keys, your funds, your rules. Paste an article link — AI generates a full strategy with risk controls and runs it automatically.",
     cta1:"🔥 Get iEarn.Bot", cta2:"★ Star on GitHub",
-    s1:"Built-in Strategies", s2:"Per AI Strategy", s3:"Non-Custodial", s4:"Open Source",
+    s1:"Built-in Strategies", s2:"Markets Supported", s3:"Non-Custodial", s4:"Open Source",
     how_lbl:"How it works", how_h2:"From install to profit<br/>in 5 minutes",
     how_sub:"No cloud accounts. No seed phrase uploads. Everything runs on your Mac or Linux machine.",
     st1t:"Install in one command", st1d:"Run the setup script. It installs dependencies, sets up your .env, and registers auto-start jobs.",
-    st2t:"Connect your wallet", st2d:"Paste your Polygon private key locally. We never see it. Approve Polymarket contracts once (~$0.01 gas).",
-    st3t:"Pick or create a strategy", st3d:"Use built-in V1/V2/V3 strategies, or describe your own in plain English — AI generates the rules.",
+    st2t:"Connect your wallet", st2d:"Paste your API key or private key locally. We never see it. Supports Polymarket, crypto exchanges, futures & stock markets.",
+    st3t:"Paste an article — AI builds your strategy", st3d:"Paste a link from X or YouTube, or paste text directly. AI reads it and generates a full strategy with risk controls and a visual parameter editor.",
     st4t:"Watch the Dashboard", st4d:"Open http://localhost:7799 in your browser. See P&L, positions, and strategy health in real time.",
     feat_lbl:"Features", feat_h2:"Everything you need<br/>to trade smarter",
     feat_sub:"Built for traders who want automation without giving up control.",
     f1t:"100% Non-Custodial", f1d:"Your private key never leaves your machine. Stored in a local .env file with chmod 600. We literally cannot touch your funds.",
-    f2t:"AI Strategy Generation", f2d:"Describe a strategy in plain English. Claude generates structured entry/exit rules, risk parameters, and market filters — ready to deploy instantly.",
+    f2t:"AI Strategy from Any Article", f2d:"Paste an X post, YouTube link, or any text. AI reads it and generates a full strategy with entry/exit rules, risk parameters and a visual parameter editor — ready to deploy instantly.",
     f3t:"SkillPay — Pay-Per-Use", f3d:"Top up once with BNB Chain USDT. Each AI call costs ~0.01 USDT, auto-deducted. No subscription. No signup. 95% goes to the developer.",
     f4t:"Live Dashboard", f4d:"Beautiful v2 dashboard at localhost:7799. KPI cards, position tracking, daily P&L, strategy health — all in your browser, no cloud needed.",
-    f5t:"3 Built-in Strategies", f5d:"V1 (BTC momentum), V2 (leaderboard copy), V3 (custom wallet tracking). Run free forever — no AI credits needed.",
+    f5t:"Any Market, One Framework", f5d:"Submit any market URL — AI auto-generates a plug-in adapter. Supports Polymarket, crypto, futures, options, and stock markets worldwide.",
     f6t:"Self-Evolving Strategies", f6d:"Built-in evolution engine analyzes wins/losses, auto-adjusts stop-loss levels, disables losing market types, and raises liquidity thresholds.",
-    f7t:"Stop-Loss & Take-Profit", f7d:"Fully configurable per-strategy. Automatic MERGE/REDEEM on resolve. Runs every 5 minutes in the background, 24/7.",
-    f8t:"Open Source, MIT", f8d:"Full source on GitHub. Audit the code yourself. Fork it, extend it, build on top of it. No black boxes.",
+    f7t:"Full Risk Controls", f7d:"Max position, max daily loss, max drawdown, trailing stop, cooldown period, order size limits, and one-click kill-switch. All configurable per strategy.",
+    f8t:"Flexible Scheduling", f8d:"Run strategies manually or on a schedule: every N minutes, hours, days, weeks, or months. APScheduler-powered with kill-switch integration and state persistence.",
+    f9t:"Open Source, MIT", f9d:"Full source on GitHub. Audit the code yourself. Fork it, extend it, build on top of it. No black boxes.",
     sp_lbl:"Powered by SkillPay", sp_h2:"Top up once.<br/>Pay per AI call.",
     sp_desc:"SkillPay is a BNB Chain billing layer built for AI Skills. Top up your balance once with USDT — iEarn.Bot auto-deducts per call. No accounts, no subscriptions, no credit cards.",
     sp_t1:"per AI call", sp_t2:"instant settlement",
@@ -430,27 +434,28 @@ const T = {
   },
   zh: {
     nav_how:"使用流程", nav_feat:"功能特性", nav_price:"价格", nav_cta:"立即开始 →",
-    badge:"已上线 Polymarket · Polygon",
-    h1:'让 AI 替你交易<br/><span class="ac">预测市场</span>',
-    hero_sub:"iEarn.Bot 在你本地运行。私钥归你、资金归你、规则归你。用自然语言描述策略——AI 自动生成并执行。",
+    badge:"v0.4 · 多市场 · Polymarket · Polygon",
+    h1:'让 AI 替你交易<br/><span class="ac">任意市场</span>',
+    hero_sub:"iEarn.Bot 在你本地运行。私钥归你、资金归你、规则归你。粘贴一篇文章链接——AI 自动生成含风控的完整策略并执行。",
     cta1:"🔥 获取 iEarn.Bot", cta2:"★ GitHub Star",
-    s1:"内置策略数", s2:"每次 AI 调用", s3:"非托管", s4:"开源",
+    s1:"内置策略数", s2:"支持市场", s3:"非托管", s4:"开源",
     how_lbl:"使用流程", how_h2:"5 分钟内<br/>从安装到运行",
     how_sub:"无需云账户，无需上传助记词。一切在你的 Mac 或 Linux 上本地运行。",
     st1t:"一条命令安装", st1d:"运行安装脚本，自动安装依赖、配置 .env、注册自启动任务。",
-    st2t:"连接你的钱包", st2d:"在本地粘贴 Polygon 私钥。我们永远看不到它。一次批准 Polymarket 合约（约 $0.01 gas）。",
-    st3t:"选择或创建策略", st3d:"使用内置 V1/V2/V3 策略，或用自然语言描述你的策略——AI 自动生成规则。",
+    st2t:"连接你的钱包", st2d:"在本地粘贴 API Key 或私钥。我们永远看不到它。支持 Polymarket、加密交易所、期货和股票市场。",
+    st3t:"粘贴文章——AI 生成策略", st3d:"粘贴 X 帖子、YouTube 链接或直接粘贴文本。AI 读取后生成含风控参数和可视化编辑界面的完整策略。",
     st4t:"查看控制面板", st4d:"在浏览器打开 http://localhost:7799，实时查看 P&L、持仓和策略健康状况。",
     feat_lbl:"功能特性", feat_h2:"交易更智能<br/>所需的一切",
     feat_sub:"为想要自动化但不想失去控制权的交易者而生。",
     f1t:"100% 非托管", f1d:"私钥永不离开你的机器，以 chmod 600 存储在本地 .env 文件中。我们无法触碰你的资金。",
-    f2t:"AI 策略生成", f2d:"用自然语言描述策略。Claude 生成结构化的入场/出场规则、风险参数和市场过滤器——立即可部署。",
+    f2t:"从任意文章生成 AI 策略", f2d:"粘贴 X 帖、YouTube 链接或任意文本。AI 读取并生成含入场/出场规则、风险参数和可视化参数编辑器的完整策略——立即可部署。",
     f3t:"SkillPay — 按次付费", f3d:"用 BNB Chain USDT 一次性充值。每次 AI 调用约 0.01 USDT，自动扣除。无订阅，无注册，95% 归开发者。",
     f4t:"实时控制面板", f4d:"精美的 v2 控制面板，运行在 localhost:7799。KPI 卡片、持仓追踪、每日 P&L——全在浏览器里，无需云服务。",
-    f5t:"3 个内置策略", f5d:"V1（BTC 动量）、V2（排行榜跟单）、V3（自定义钱包追踪）。永久免费运行，无需 AI 积分。",
+    f5t:"任意市场，统一框架", f5d:"提交任意市场 URL，AI 自动生成插件适配器。支持 Polymarket、加密货币、期货、期权及全球各国股票市场。",
     f6t:"自进化策略", f6d:"内置进化引擎分析盈亏，自动调整止损水位，禁用亏损市场类型，提升流动性门槛——无需 LLM。",
-    f7t:"止损 & 止盈", f7d:"每个策略独立配置。结算时自动 MERGE/REDEEM。24/7 每 5 分钟后台运行。",
-    f8t:"开源 MIT", f8d:"完整源码在 GitHub。自行审计代码，Fork、扩展、基于它构建。没有黑盒子。",
+    f7t:"全套风控", f7d:"最大持仓、最大日亏损、最大回撤、追踪止损、冷却期、单笔限额，以及一键熔断开关。每个策略独立配置。",
+    f8t:"灵活调度", f8d:"手动一键运行或定时执行：每 N 分钟、小时、天、周或月。基于 APScheduler，支持 kill-switch 联动和状态持久化。",
+    f9t:"开源 MIT", f9d:"完整源码在 GitHub。自行审计代码，Fork、扩展、基于它构建。没有黑盒子。",
     sp_lbl:"由 SkillPay 驱动", sp_h2:"一次充值。<br/>按次付费。",
     sp_desc:"SkillPay 是专为 AI Skills 构建的 BNB Chain 计费层。用 USDT 充值一次，iEarn.Bot 每次调用自动扣款。无账户，无订阅，无信用卡。",
     sp_t1:"每次 AI 调用", sp_t2:"即时结算",
@@ -482,27 +487,28 @@ const T = {
   },
   ja: {
     nav_how:"使い方", nav_feat:"機能", nav_price:"料金", nav_cta:"今すぐ始める →",
-    badge:"Polymarket · Polygon にて稼働中",
-    h1:'AIに<span class="ac">予測市場</span>を<br/>取引させよう',
-    hero_sub:"iEarn.Bot はあなたのマシン上でローカルに動作します。鍵もあなたのもの、資金もあなたのもの、ルールもあなたのもの。自然言語で戦略を説明するだけ——AIが自動で構築・実行します。",
+    badge:"v0.4 · マルチマーケット · Polymarket · Polygon",
+    h1:'AIに<span class="ac">あらゆる市場</span>を<br/>取引させよう',
+    hero_sub:"iEarn.Bot はあなたのマシン上でローカルに動作します。鍵もあなたのもの、資金もあなたのもの、ルールもあなたのもの。記事リンクを貼るだけ——AIがリスク管理付きの完全な戦略を生成・実行します。",
     cta1:"🔥 iEarn.Botを入手", cta2:"★ GitHubでスター",
-    s1:"内蔵戦略数", s2:"AI戦略1回あたり", s3:"非カストディアル", s4:"オープンソース",
+    s1:"内蔵戦略数", s2:"対応マーケット", s3:"非カストディアル", s4:"オープンソース",
     how_lbl:"使い方", how_h2:"インストールから稼働まで<br/>5分",
     how_sub:"クラウドアカウント不要。シードフレーズのアップロード不要。すべてあなたのMacまたはLinux上で動作します。",
     st1t:"1コマンドでインストール", st1d:"セットアップスクリプトを実行するだけ。依存関係のインストール、.envの設定、自動起動ジョブの登録まで自動で完了。",
-    st2t:"ウォレットを接続", st2d:"Polygonの秘密鍵をローカルに貼り付けます。私たちには見えません。Polymarketコントラクトを一度承認するだけ（ガス代約$0.01）。",
-    st3t:"戦略を選択または作成", st3d:"内蔵のV1/V2/V3戦略を使うか、自然言語で戦略を説明——AIがルールを自動生成します。",
+    st2t:"ウォレットを接続", st2d:"APIキーまたは秘密鍵をローカルに貼り付けます。私たちには見えません。Polymarket、仮想通貨取引所、先物・株式市場に対応。",
+    st3t:"記事を貼る——AIが戦略を生成", st3d:"XのポストやYouTubeリンクを貼るか、テキストを直接貼り付け。AIが読み取り、リスク管理とビジュアルパラメータエディタ付きの完全な戦略を生成します。",
     st4t:"ダッシュボードで確認", st4d:"ブラウザでhttp://localhost:7799を開き、P&L、ポジション、戦略の状態をリアルタイムで確認できます。",
     feat_lbl:"機能", feat_h2:"よりスマートなトレードに<br/>必要なすべて",
     feat_sub:"自動化しながらも制御を手放したくないトレーダーのために作られました。",
     f1t:"100% 非カストディアル", f1d:"秘密鍵はあなたのマシンから出ません。chmod 600のローカル.envファイルに保存。私たちはあなたの資金に触れることができません。",
-    f2t:"AI戦略生成", f2d:"戦略を自然言語で説明するだけ。Claudeが構造化されたエントリー/エグジットルール、リスクパラメータ、マーケットフィルターを生成——すぐにデプロイ可能。",
+    f2t:"どんな記事からもAI戦略を生成", f2d:"XのポストやYouTubeリンク、テキストを貼り付けるだけ。AIが読み取り、エントリー/エグジットルール、リスクパラメータ、ビジュアルパラメータエディタ付きの完全な戦略を生成——すぐにデプロイ可能。",
     f3t:"SkillPay — 従量課金", f3d:"BNBチェーンUSDTで一度チャージ。各AIコールは約0.01 USDT自動差し引き。サブスクなし、登録なし、売上の95%は開発者へ。",
     f4t:"ライブダッシュボード", f4d:"localhost:7799の美しいv2ダッシュボード。KPIカード、ポジション追跡、日次P&L——すべてブラウザで、クラウド不要。",
-    f5t:"3つの内蔵戦略", f5d:"V1（BTCモメンタム）、V2（リーダーボードコピー）、V3（カスタムウォレット追跡）。AIクレジット不要で永久無料。",
+    f5t:"あらゆる市場、一つのフレームワーク", f5d:"マーケットのURLを送信するだけで、AIがプラグインアダプターを自動生成。Polymarket、仮想通貨、先物、オプション、世界中の株式市場に対応。",
     f6t:"自己進化型戦略", f6d:"内蔵の進化エンジンが勝ち負けを分析し、ストップロスを自動調整、負けている市場タイプを無効化、流動性の閾値を引き上げます——LLM不要。",
-    f7t:"ストップロス & テイクプロフィット", f7d:"戦略ごとに完全設定可能。決済時に自動でMERGE/REDEEM。24時間365日、5分ごとにバックグラウンドで実行。",
-    f8t:"オープンソース MIT", f8d:"GitHubに全ソースコード公開。コードを自分で監査できます。フォーク、拡張、その上に構築——ブラックボックスなし。",
+    f7t:"フルリスクコントロール", f7d:"最大ポジション、最大日次損失、最大ドローダウン、トレーリングストップ、クールダウン期間、注文サイズ制限、ワンクリックキルスイッチ。すべて戦略ごとに設定可能。",
+    f8t:"柔軟なスケジューリング", f8d:"手動実行またはスケジュール実行：N分、時間、日、週、月ごと。APScheduler搭載でキルスイッチ連携と状態永続化に対応。",
+    f9t:"オープンソース MIT", f9d:"GitHubに全ソースコード公開。コードを自分で監査できます。フォーク、拡張、その上に構築——ブラックボックスなし。",
     sp_lbl:"SkillPay で動作", sp_h2:"一度チャージ。<br/>AIコールごとに課金。",
     sp_desc:"SkillPayはAI Skills向けに構築されたBNBチェーンの課金レイヤーです。USDTで一度チャージすればiEarn.Botが自動的にコールごとに差し引きます。アカウント不要、サブスクなし、クレジットカード不要。",
     sp_t1:"AIコールごと", sp_t2:"即時決済",
