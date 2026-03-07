@@ -1036,3 +1036,16 @@ body {
 .lang-menu.open{display:block}
 .lang-option{padding:9px 13px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:8px;transition:background .15s}
 .lang-option:hover{background:rgba(249,115,22,.1);color:#f97316}
+
+/* ── Pricing Modal Cards ── */
+.pricing-card{background:#131c2e;border:1px solid #1e2d45;border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;transition:border-color .2s;position:relative}
+.pricing-card:hover,.pricing-card.popular{border-color:#f97316}
+.pricing-card.popular{background:#1a1f2e}
+.popular-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#f97316;color:#fff;font-size:.7rem;font-weight:700;padding:2px 12px;border-radius:99px;white-space:nowrap}
+.pricing-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tier-name{font-weight:800;font-size:1.1rem}
+.tier-price{font-size:1.2rem;font-weight:800;color:#f97316}
+.tier-period{font-size:.75rem;color:#94a3b8;font-weight:400}
+.tier-features{list-style:none;font-size:.82rem;color:#94a3b8;line-height:2;padding:0;margin:0}
+.btn-tier{width:100%;background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.3);padding:10px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:12px;font-size:.875rem}
+.popular-btn{background:#f97316;color:#fff;border-color:#f97316}

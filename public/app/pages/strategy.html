@@ -51,7 +51,7 @@
 
   <!-- Actions -->
   <div class="result-actions">
-    <button class="action-btn primary" onclick="deployStrategy()" data-i18n="strat_deploy">▶ Deploy to Mac</button>
+    <button class="action-btn primary" onclick="showDeployModal()" data-i18n="strat_deploy">▶ Deploy to Mac</button>
     <button class="action-btn ghost" onclick="shareStrategy()" data-i18n="strat_share">📤 Share</button>
   </div>
 </div>
@@ -68,6 +68,69 @@
     </button>
     <button class="btn btn-secondary" onclick="setExample('Fed rate cut probability — macro markets. Buy YES when CME FedWatch shows >70% chance. Tight stop at 40¢.')">
       🏦 Macro Event
+    </button>
+  </div>
+</div>
+
+<!-- ── Pricing Modal overlay ── -->
+<div id="pricingModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;overflow-y:auto;padding:20px">
+  <div style="max-width:420px;margin:0 auto;padding-top:20px">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:1.3rem;font-weight:800">选择你的方案</div>
+      <div style="color:#94a3b8;font-size:.85rem;margin-top:4px">策略部署到本地后，运行永久免费</div>
+    </div>
+
+    <!-- Mini -->
+    <div class="pricing-card" onclick="selectTier('mini')">
+      <div class="pricing-header">
+        <div class="tier-name">Mini</div>
+        <div class="tier-price">$9.9 <span class="tier-period">/策略</span></div>
+      </div>
+      <ul class="tier-features">
+        <li>✅ 1个策略部署</li>
+        <li>✅ 免费修改3次</li>
+        <li>✅ 本地运行永久免费</li>
+        <li>✅ 基础风控套件</li>
+      </ul>
+      <button class="btn-tier">选择 Mini →</button>
+    </div>
+
+    <!-- Pro -->
+    <div class="pricing-card popular" onclick="selectTier('pro')">
+      <div class="popular-badge">🔥 最受欢迎</div>
+      <div class="pricing-header">
+        <div class="tier-name">Pro</div>
+        <div class="tier-price">$19 <span class="tier-period">/月</span></div>
+      </div>
+      <ul class="tier-features">
+        <li>✅ 10个策略部署/月</li>
+        <li>✅ 每策略免费修改6次</li>
+        <li>✅ 本地运行永久免费</li>
+        <li>✅ 完整风控套件</li>
+        <li>✅ 优先支持</li>
+      </ul>
+      <button class="btn-tier popular-btn">选择 Pro →</button>
+    </div>
+
+    <!-- Max -->
+    <div class="pricing-card" onclick="selectTier('max')">
+      <div class="pricing-header">
+        <div class="tier-name">Max</div>
+        <div class="tier-price">$19.9 <span class="tier-period">/年</span></div>
+      </div>
+      <ul class="tier-features">
+        <li>✅ 无限策略部署</li>
+        <li>✅ 每策略无限次修改</li>
+        <li>✅ 本地运行永久免费</li>
+        <li>✅ 自接LLM-API（节省成本）</li>
+        <li>✅ 早期功能优先体验</li>
+      </ul>
+      <div style="font-size:.75rem;color:#64748b;margin:8px 0 12px">需自行提供LLM-API Key</div>
+      <button class="btn-tier">选择 Max →</button>
+    </div>
+
+    <button onclick="closePricingModal()" style="width:100%;background:transparent;border:1px solid #1e2d45;color:#64748b;padding:10px;border-radius:10px;margin-top:8px;cursor:pointer;font-size:.85rem">
+      取消
     </button>
   </div>
 </div>
@@ -286,6 +349,31 @@ function renderStrategyResult(strategy) {
 
   document.getElementById('strategy-result').style.display = 'block'
   document.getElementById('strategy-result').scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// ── Pricing Modal ─────────────────────────────────────────────────────────
+function showDeployModal() {
+  if (!_lastStrategy) { toast('No strategy to deploy', 'info'); return }
+  document.getElementById('pricingModal').style.display = 'block'
+  document.body.style.overflow = 'hidden'
+}
+
+function closePricingModal() {
+  document.getElementById('pricingModal').style.display = 'none'
+  document.body.style.overflow = ''
+}
+
+function selectTier(tier) {
+  // 保存选择的套餐
+  localStorage.setItem('selected_tier', tier)
+  closePricingModal()
+  // 跳转到支付（暂时跳转到官网定价页）
+  const payUrls = {
+    mini: 'https://iearn.bot/#pricing?tier=mini',
+    pro: 'https://iearn.bot/#pricing?tier=pro',
+    max: 'https://iearn.bot/#pricing?tier=max'
+  }
+  window.open(payUrls[tier], '_blank')
 }
 
 // ── Deploy to Mac ────────────────────────────────────────────────────────
