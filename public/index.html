@@ -189,7 +189,7 @@
       <div class="lang-menu" id="langMenu">
         <div class="lang-option" onclick="setLang('en')">🇺🇸 English</div>
         <div class="lang-option" onclick="setLang('zh')">🇨🇳 中文</div>
-        <div class="lang-option" onclick="setLang('ja')">🇯🇵 日本語</div>
+        <!-- 日本語: coming soon as downloadable pack -->
       </div>
     </div>
     <a href="#pricing" class="btn-nav" data-i18n="nav_cta">Get Started →</a>
@@ -757,8 +757,10 @@ let currentLang = localStorage.getItem('lang') || 'en';
 const LANG_META = {
   en: {flag:'🇺🇸', name:'EN'},
   zh: {flag:'🇨🇳', name:'中文'},
-  ja: {flag:'🇯🇵', name:'日本語'},
+  // More languages available as downloadable packs: /lang/<code>.json
 };
+// Language pack cache
+const _langCache = {};
 
 function toggleLangMenu() {
   document.getElementById('langMenu').classList.toggle('open');
@@ -771,16 +773,33 @@ document.addEventListener('click', e => {
   }
 });
 
-function setLang(lang) {
+async function loadLangPack(lang) {
+  // 内置语言（已内嵌在 T 对象中）
+  if (T[lang]) return T[lang];
+  // 缓存命中
+  if (_langCache[lang]) return _langCache[lang];
+  // 动态下载语言包
+  try {
+    const res = await fetch('/lang/' + lang + '.json');
+    if (!res.ok) throw new Error('not found');
+    const pack = await res.json();
+    _langCache[lang] = pack;
+    return pack;
+  } catch(e) {
+    console.warn('Language pack not found for:', lang, '— falling back to EN');
+    return T.en;
+  }
+}
+
+async function setLang(lang) {
+  const t = await loadLangPack(lang);
   currentLang = lang;
   localStorage.setItem('lang', lang);
   document.documentElement.lang = lang;
-  // Update dropdown button display
   const meta = LANG_META[lang] || LANG_META.en;
   document.getElementById('langFlag').textContent = meta.flag;
   document.getElementById('langName').textContent = meta.name;
   document.getElementById('langMenu')?.classList.remove('open');
-  const t = T[lang] || T.en;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
