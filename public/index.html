@@ -522,6 +522,11 @@
       <div class="faq-item"><div class="faq-q"><span data-i18n="q3">How much money do I need to start?</span><span>+</span></div><div class="faq-a" data-i18n="a3">Minimum ~$50 USDC.e on Polygon to get started. You'll also need a tiny amount of POL (~$0.01) for gas fees. We recommend starting small while you learn how the strategies perform.</div></div>
       <div class="faq-item"><div class="faq-q"><span data-i18n="q4">Can I run multiple strategies at once?</span><span>+</span></div><div class="faq-a" data-i18n="a4">Yes. V1, V2, and V3 run independently on separate schedules. You can also add custom V4+ strategies that run in parallel. Each strategy has independent stop-loss and take-profit settings.</div></div>
       <div class="faq-item"><div class="faq-q"><span data-i18n="q5">Does this guarantee profit?</span><span>+</span></div><div class="faq-a" data-i18n="a5">No. Prediction markets are speculative and iEarn.Bot is experimental software. Past performance doesn't guarantee future results. Only use funds you can afford to lose entirely. DYOR.</div></div>
+      <div class="faq-item"><div class="faq-q"><span data-i18n="q6">What markets does iEarn.Bot support?</span><span>+</span></div><div class="faq-a" data-i18n="a6">Currently Polymarket (prediction markets). Binance and Kalshi adapters are in development. We only support regulated, globally recognized exchanges — unlisted or unregulated platforms are blocked by design.</div></div>
+      <div class="faq-item"><div class="faq-q"><span data-i18n="q7">Do I need coding skills?</span><span>+</span></div><div class="faq-a" data-i18n="a7">No. iEarn.Bot is built for non-technical users. Just paste a URL or describe your idea in plain language — AI handles strategy generation, deployment, and execution automatically.</div></div>
+      <div class="faq-item"><div class="faq-q"><span data-i18n="q8">What happens after I deploy a strategy?</span><span>+</span></div><div class="faq-a" data-i18n="a8">The strategy runs locally on your machine — completely offline from our servers. Your funds, your rules. You can monitor it on the dashboard, pause it anytime, or set automatic stop-loss / take-profit limits.</div></div>
+      <div class="faq-item"><div class="faq-q"><span data-i18n="q9">Is iEarn.Bot open source?</span><span>+</span></div><div class="faq-a" data-i18n="a9">Yes. iEarn.Bot is fully open source under the MIT License. Anyone can audit, fork, or contribute. See our Open Source Manifesto for the full story.</div></div>
+      <div class="faq-item"><div class="faq-q"><span data-i18n="q10">How is the Mini plan different from Pro?</span><span>+</span></div><div class="faq-a" data-i18n="a10">Mini is pay-per-deploy ($9.9 per strategy, 3 free modifications). Pro is a monthly subscription ($19/month, up to 10 strategies total, 6 free modifications each). Both plans run locally forever after deployment — no ongoing charges.</div></div>
     </div>
   </div>
 </section>
@@ -617,6 +622,11 @@ const T = {
     q3:"How much money do I need to start?", a3:"Minimum ~$50 USDC.e on Polygon to get started. You'll also need a tiny amount of POL (~$0.01) for gas fees. We recommend starting small while you learn how the strategies perform.",
     q4:"Can I run multiple strategies at once?", a4:"Yes. V1, V2, and V3 run independently on separate schedules. You can also add custom V4+ strategies that run in parallel. Each strategy has independent stop-loss and take-profit settings.",
     q5:"Does this guarantee profit?", a5:"No. Prediction markets are speculative and iEarn.Bot is experimental software. Past performance doesn't guarantee future results. Only use funds you can afford to lose entirely. DYOR.",
+    q6:"What markets does iEarn.Bot support?", a6:"Currently Polymarket (prediction markets). Binance and Kalshi adapters are in development. We only support regulated, globally recognized exchanges — unlisted or unregulated platforms are blocked by design.",
+    q7:"Do I need coding skills?", a7:"No. iEarn.Bot is built for non-technical users. Just paste a URL or describe your idea in plain language — AI handles strategy generation, deployment, and execution automatically.",
+    q8:"What happens after I deploy a strategy?", a8:"The strategy runs locally on your machine — completely offline from our servers. Your funds, your rules. You can monitor it on the dashboard, pause it anytime, or set automatic stop-loss / take-profit limits.",
+    q9:"Is iEarn.Bot open source?", a9:"Yes. iEarn.Bot is fully open source under the MIT License. Anyone can audit, fork, or contribute. See our Open Source Manifesto for the full story.",
+    q10:"How is the Mini plan different from Pro?", a10:"Mini is pay-per-deploy ($9.9 per strategy, 3 free modifications). Pro is a monthly subscription ($19/month, up to 10 strategies total, 6 free modifications each). Both plans run locally forever after deployment — no ongoing charges.",
     footer:"© 2026 iEarn.Bot — MIT License — Built with ❤️ and USDC"
   },
   zh: {
@@ -677,6 +687,11 @@ const T = {
     q3:"我需要多少钱才能开始？", a3:"最低约 50 美元的 Polygon USDC.e 即可开始。还需要少量 POL（约 0.01 美元）用于 gas 费用。建议从小额开始，边学边熟悉策略表现。",
     q4:"可以同时运行多个策略吗？", a4:"可以。V1、V2、V3 按独立计划分别运行。你还可以添加并行运行的自定义 V4+ 策略，每个策略都有独立的止损和止盈设置。",
     q5:"这能保证盈利吗？", a5:"不能。预测市场具有投机性，iEarn.Bot 是实验性软件。历史表现不代表未来结果。只使用你能完全承受损失的资金。DYOR。",
+    q6:"iEarn.Bot 支持哪些市场？", a6:"目前支持 Polymarket（预测市场）。Binance 和 Kalshi 适配器正在开发中。我们只支持受监管的全球知名交易所，未上市或不受监管的平台将被系统拒绝。",
+    q7:"我需要编程技能吗？", a7:"不需要。iEarn.Bot 专为非技术用户设计。只需粘贴链接或用自然语言描述你的想法——AI 自动完成策略生成、部署和执行。",
+    q8:"策略部署后会发生什么？", a8:"策略在你的本地机器上运行——完全离线于我们的服务器。你的资金，你的规则。你可以在仪表盘上监控，随时暂停，或设置自动止损/止盈。",
+    q9:"iEarn.Bot 是开源的吗？", a9:"是的。iEarn.Bot 基于 MIT 协议完全开源。任何人都可以审计、Fork 或贡献代码。详见《开源宣言》。",
+    q10:"Mini 和 Pro 有什么区别？", a10:"Mini 按次付费（每个策略 $9.9，3 次免费修改）。Pro 为月度订阅（$19/月，累计最多 10 个策略，每个 6 次免费修改）。两个方案部署后本地永久免费运行，不再产生费用。",
     footer:"© 2026 iEarn.Bot — MIT 许可证 — 用 ❤️ 和 USDC 构建"
   },
   ja: {
