@@ -192,7 +192,7 @@
         <!-- 日本語: coming soon as downloadable pack -->
       </div>
     </div>
-    <a href="#pricing" class="btn-nav" data-i18n="nav_cta">Get Started →</a>
+    <a href="#download" class="btn-nav" data-i18n="nav_cta">Get Started →</a>
   </div>
 </nav>
 
@@ -331,7 +331,7 @@
           <li data-i18n="t2_f4">Full risk control suite</li>
           <li data-i18n="t2_f5">Priority support</li>
         </ul>
-        <a href="mailto:hi@iearn.bot?subject=Pro%20Plan" class="btp pri" data-i18n="t2_btn">Buy Pro →</a>
+        <a href="https://buy.stripe.com/iearnbot_pro_placeholder" class="btp pri" data-i18n="t2_btn" onclick="stripeCheckout('pro', 19, 'monthly'); return false;">Buy Pro →</a>
       </div>
       <!-- Max -->
       <div class="pc">
@@ -347,7 +347,7 @@
           <li data-i18n="t3_f6">Priority support + early features</li>
         </ul>
         <div style="font-size:.78rem;color:var(--muted);margin:6px 0 10px" data-i18n="t3_note">Requires your own LLM API key</div>
-        <a href="mailto:hi@iearn.bot?subject=Max%20Plan" class="btp ghost" data-i18n="t3_btn">Buy Max →</a>
+        <a href="https://buy.stripe.com/iearnbot_max_placeholder" class="btp ghost" data-i18n="t3_btn" onclick="stripeCheckout('max', 19.9, 'yearly'); return false;">Buy Max →</a>
       </div>
     </div>
   </div>
@@ -407,88 +407,6 @@
   </div>
 </section>
 
-<!-- INSTALL -->
-<!-- ── Download Section ─────────────────────────────────────────── -->
-<section id="download" class="bg2">
-  <div class="container" style="max-width:860px">
-    <div class="sec-lbl" data-i18n="dl_lbl">Download</div>
-    <h2 data-i18n="dl_h2">Get iEarn.Bot</h2>
-    <p class="sec-sub" data-i18n="dl_sub">Choose your platform. Deploy locally. Run forever free.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:2.5rem">
-
-      <!-- macOS DMG -->
-      <a href="https://github.com/iEarnBot/iEarnBot/releases/latest/download/iEarn.Bot-arm64.dmg"
-         class="dl-card" style="text-decoration:none">
-        <div class="dl-icon">
-          <!-- Apple + Mac mini SVG -->
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
-            <!-- Apple logo shape -->
-            <path d="M33.2 25.6c-.1-4.1 3.3-6 3.5-6.1-1.9-2.8-4.8-3.1-5.9-3.2-2.5-.3-4.9 1.5-6.2 1.5-1.3 0-3.2-1.5-5.3-1.4-2.7.0-5.2 1.6-6.6 4-2.8 4.9-.7 12.1 2 16.1 1.3 1.9 2.9 4.1 5 4 2-.1 2.8-1.3 5.2-1.3 2.4 0 3.1 1.3 5.2 1.2 2.2 0 3.5-2 4.8-3.9 1.5-2.2 2.2-4.4 2.2-4.5-.1-.1-4-1.6-4-6.4z" fill="#e2e8f0"/>
-            <path d="M29.1 13.8c1.1-1.4 1.9-3.3 1.7-5.2-1.6.1-3.6 1.1-4.7 2.5-1 1.2-1.9 3.1-1.7 5 1.8.1 3.6-1 4.7-2.3z" fill="#e2e8f0"/>
-            <!-- Mac mini body -->
-            <rect x="10" y="38" width="28" height="7" rx="2" fill="#94a3b8"/>
-            <rect x="20" y="36" width="8" height="3" rx="1" fill="#64748b"/>
-            <circle cx="35" cy="41.5" r="1.2" fill="#4ade80"/>
-          </svg>
-        </div>
-        <div class="dl-name" data-i18n="dl_mac">macOS</div>
-        <div class="dl-desc" data-i18n="dl_mac_d">Apple Silicon · Intel</div>
-        <div class="dl-badge ready" data-i18n="dl_ready">Ready</div>
-      </a>
-
-      <!-- Windows EXE -->
-      <a href="#" class="dl-card disabled" style="text-decoration:none">
-        <div class="dl-icon">
-          <!-- Microsoft Windows logo (4 colored squares) -->
-          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
-            <rect x="4"  y="4"  width="16" height="16" rx="2" fill="#f35325"/>
-            <rect x="24" y="4"  width="16" height="16" rx="2" fill="#81bc06"/>
-            <rect x="4"  y="24" width="16" height="16" rx="2" fill="#05a6f0"/>
-            <rect x="24" y="24" width="16" height="16" rx="2" fill="#ffba08"/>
-          </svg>
-        </div>
-        <div class="dl-name" data-i18n="dl_win">Windows</div>
-        <div class="dl-desc" data-i18n="dl_win_d">Windows 10/11 · x64</div>
-        <div class="dl-badge soon" data-i18n="dl_soon">Coming Soon</div>
-      </a>
-
-      <!-- Chrome Extension -->
-      <a href="#" class="dl-card disabled" style="text-decoration:none">
-        <div class="dl-icon">
-          <!-- Chrome logo -->
-          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
-            <circle cx="22" cy="22" r="18" fill="white"/>
-            <!-- Red slice -->
-            <path d="M22 4 A18 18 0 0 1 37.6 13 L22 22 Z" fill="#EA4335"/>
-            <!-- Blue slice -->
-            <path d="M37.6 13 A18 18 0 0 1 37.6 31 L22 22 Z" fill="#4285F4"/>
-            <!-- Green slice -->
-            <path d="M37.6 31 A18 18 0 0 1 6.4 31 L22 22 Z" fill="#34A853"/>
-            <!-- Yellow slice -->
-            <path d="M6.4 31 A18 18 0 0 1 6.4 13 L22 22 Z" fill="#FBBC05"/>
-            <!-- Center circle -->
-            <circle cx="22" cy="22" r="7" fill="white"/>
-            <circle cx="22" cy="22" r="5.5" fill="#4285F4"/>
-          </svg>
-        </div>
-        <div class="dl-name" data-i18n="dl_ext">Browser Extension</div>
-        <div class="dl-desc" data-i18n="dl_ext_d">Chrome · Edge</div>
-        <div class="dl-badge soon" data-i18n="dl_soon">Coming Soon</div>
-      </a>
-
-      <!-- OpenClaw Skill -->
-      <a href="https://github.com/iEarnBot/iEarnBot/tree/main/skills" class="dl-card" style="text-decoration:none">
-        <div class="dl-icon">
-          <span style="font-size:38px">🦞</span>
-        </div>
-        <div class="dl-name" data-i18n="dl_skill">OpenClaw Skill</div>
-        <div class="dl-desc" data-i18n="dl_skill_d">AI Agent Plugin</div>
-        <div class="dl-badge ready" data-i18n="dl_ready">Ready</div>
-      </a>
-
-    </div>
-  </div>
-</section>
 
 <section id="install">
   <div class="container" style="max-width:760px">
@@ -826,6 +744,29 @@ document.querySelectorAll('.faq-q').forEach(q => {
 
 // Init
 setLang(currentLang);
+
+// ── Stripe Checkout ────────────────────────────────────────────
+// TODO: 替换为真实的 Stripe publishable key 和 price IDs
+const STRIPE_LINKS = {
+  pro:  'https://buy.stripe.com/test_pro_link',   // 替换为真实 Stripe Payment Link
+  max:  'https://buy.stripe.com/test_max_link',   // 替换为真实 Stripe Payment Link
+};
+
+function stripeCheckout(plan, amount, period) {
+  // 优先使用 Stripe Payment Link（无需前端 Stripe.js）
+  const link = STRIPE_LINKS[plan];
+  if (link && !link.includes('test_')) {
+    window.open(link, '_blank');
+  } else {
+    // 开发模式：显示确认弹窗
+    const ok = confirm(
+      `准备前往 Stripe 完成支付\n\n方案：${plan.toUpperCase()}\n金额：$${amount} / ${period === 'monthly' ? '月' : '年'}\n\n（开发模式：Stripe Payment Link 待配置）\n\n是否继续？`
+    );
+    if (ok) {
+      alert('请在 Vercel 环境变量中配置 Stripe Payment Link，\n然后更新 STRIPE_LINKS 对象中的 URL。\n\n文档：https://stripe.com/docs/payment-links');
+    }
+  }
+}
 </script>
 </body>
 </html>
