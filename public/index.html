@@ -9,6 +9,7 @@
   <meta property="og:image" content="https://iearn.bot/og.svg" />
   <meta property="og:url" content="https://iearn.bot" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -99,6 +100,16 @@
     .pf li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
     .pf li.dim::before{content:'—';color:var(--muted)}
     .pf li.dim{color:var(--muted)}
+    /* Download cards */
+    .dl-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px 16px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .2s;cursor:pointer}
+    .dl-card:not(.disabled):hover{border-color:rgba(249,115,22,.5);transform:translateY(-3px);box-shadow:0 12px 36px rgba(249,115,22,.1)}
+    .dl-card.disabled{opacity:.55;cursor:not-allowed}
+    .dl-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+    .dl-name{font-size:15px;font-weight:800;color:var(--text)}
+    .dl-desc{font-size:12px;color:var(--subtle)}
+    .dl-badge{font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;margin-top:4px}
+    .dl-badge.ready{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+    .dl-badge.soon{background:rgba(148,163,184,.1);color:var(--subtle);border:1px solid var(--border)}
     .btp{display:block;width:100%;text-align:center;padding:.8rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .2s}
     .btp.pri{background:var(--accent);color:#fff}
     .btp.pri:hover{background:var(--accent2)}
@@ -397,6 +408,88 @@
 </section>
 
 <!-- INSTALL -->
+<!-- ── Download Section ─────────────────────────────────────────── -->
+<section id="download" class="bg2">
+  <div class="container" style="max-width:860px">
+    <div class="sec-lbl" data-i18n="dl_lbl">Download</div>
+    <h2 data-i18n="dl_h2">Get iEarn.Bot</h2>
+    <p class="sec-sub" data-i18n="dl_sub">Choose your platform. Deploy locally. Run forever free.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:2.5rem">
+
+      <!-- macOS DMG -->
+      <a href="https://github.com/iEarnBot/iEarnBot/releases/latest/download/iEarn.Bot-arm64.dmg"
+         class="dl-card" style="text-decoration:none">
+        <div class="dl-icon">
+          <!-- Apple + Mac mini SVG -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <!-- Apple logo shape -->
+            <path d="M33.2 25.6c-.1-4.1 3.3-6 3.5-6.1-1.9-2.8-4.8-3.1-5.9-3.2-2.5-.3-4.9 1.5-6.2 1.5-1.3 0-3.2-1.5-5.3-1.4-2.7.0-5.2 1.6-6.6 4-2.8 4.9-.7 12.1 2 16.1 1.3 1.9 2.9 4.1 5 4 2-.1 2.8-1.3 5.2-1.3 2.4 0 3.1 1.3 5.2 1.2 2.2 0 3.5-2 4.8-3.9 1.5-2.2 2.2-4.4 2.2-4.5-.1-.1-4-1.6-4-6.4z" fill="#e2e8f0"/>
+            <path d="M29.1 13.8c1.1-1.4 1.9-3.3 1.7-5.2-1.6.1-3.6 1.1-4.7 2.5-1 1.2-1.9 3.1-1.7 5 1.8.1 3.6-1 4.7-2.3z" fill="#e2e8f0"/>
+            <!-- Mac mini body -->
+            <rect x="10" y="38" width="28" height="7" rx="2" fill="#94a3b8"/>
+            <rect x="20" y="36" width="8" height="3" rx="1" fill="#64748b"/>
+            <circle cx="35" cy="41.5" r="1.2" fill="#4ade80"/>
+          </svg>
+        </div>
+        <div class="dl-name" data-i18n="dl_mac">macOS</div>
+        <div class="dl-desc" data-i18n="dl_mac_d">Apple Silicon · Intel</div>
+        <div class="dl-badge ready" data-i18n="dl_ready">Ready</div>
+      </a>
+
+      <!-- Windows EXE -->
+      <a href="#" class="dl-card disabled" style="text-decoration:none">
+        <div class="dl-icon">
+          <!-- Microsoft Windows logo (4 colored squares) -->
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect x="4"  y="4"  width="16" height="16" rx="2" fill="#f35325"/>
+            <rect x="24" y="4"  width="16" height="16" rx="2" fill="#81bc06"/>
+            <rect x="4"  y="24" width="16" height="16" rx="2" fill="#05a6f0"/>
+            <rect x="24" y="24" width="16" height="16" rx="2" fill="#ffba08"/>
+          </svg>
+        </div>
+        <div class="dl-name" data-i18n="dl_win">Windows</div>
+        <div class="dl-desc" data-i18n="dl_win_d">Windows 10/11 · x64</div>
+        <div class="dl-badge soon" data-i18n="dl_soon">Coming Soon</div>
+      </a>
+
+      <!-- Chrome Extension -->
+      <a href="#" class="dl-card disabled" style="text-decoration:none">
+        <div class="dl-icon">
+          <!-- Chrome logo -->
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <circle cx="22" cy="22" r="18" fill="white"/>
+            <!-- Red slice -->
+            <path d="M22 4 A18 18 0 0 1 37.6 13 L22 22 Z" fill="#EA4335"/>
+            <!-- Blue slice -->
+            <path d="M37.6 13 A18 18 0 0 1 37.6 31 L22 22 Z" fill="#4285F4"/>
+            <!-- Green slice -->
+            <path d="M37.6 31 A18 18 0 0 1 6.4 31 L22 22 Z" fill="#34A853"/>
+            <!-- Yellow slice -->
+            <path d="M6.4 31 A18 18 0 0 1 6.4 13 L22 22 Z" fill="#FBBC05"/>
+            <!-- Center circle -->
+            <circle cx="22" cy="22" r="7" fill="white"/>
+            <circle cx="22" cy="22" r="5.5" fill="#4285F4"/>
+          </svg>
+        </div>
+        <div class="dl-name" data-i18n="dl_ext">Browser Extension</div>
+        <div class="dl-desc" data-i18n="dl_ext_d">Chrome · Edge</div>
+        <div class="dl-badge soon" data-i18n="dl_soon">Coming Soon</div>
+      </a>
+
+      <!-- OpenClaw Skill -->
+      <a href="https://github.com/iEarnBot/iEarnBot/tree/main/skills" class="dl-card" style="text-decoration:none">
+        <div class="dl-icon">
+          <span style="font-size:38px">🦞</span>
+        </div>
+        <div class="dl-name" data-i18n="dl_skill">OpenClaw Skill</div>
+        <div class="dl-desc" data-i18n="dl_skill_d">AI Agent Plugin</div>
+        <div class="dl-badge ready" data-i18n="dl_ready">Ready</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <section id="install">
   <div class="container" style="max-width:760px">
     <div class="sec-lbl" data-i18n="inst_lbl">Get Started</div>
@@ -513,6 +606,10 @@ const T = {
     t3_f4:"Bring your own LLM API key", t3_f5:"Full risk control suite", t3_f6:"Priority support + early features",
     t3_note:"Requires your own LLM API key", t3_btn:"Buy Max →",
     inst_lbl:"Get Started", inst_h2:"Install in 60 seconds", inst_sub:"macOS and Linux supported. Python 3.11+ required.",
+    dl_lbl:"Download", dl_h2:"Get iEarn.Bot", dl_sub:"Choose your platform. Deploy locally. Run forever free.",
+    dl_mac:"macOS", dl_mac_d:"Apple Silicon · Intel", dl_win:"Windows", dl_win_d:"Windows 10/11 · x64",
+    dl_ext:"Browser Extension", dl_ext_d:"Chrome · Edge", dl_skill:"OpenClaw Skill", dl_skill_d:"AI Agent Plugin",
+    dl_ready:"✓ Ready", dl_soon:"Coming Soon",
     inst_warn:"⚠️ Only deposit what you can afford to lose. This is experimental software. DYOR.",
     faq_lbl:"FAQ", faq_h2:"Common questions",
     q1:"Is my private key safe?", a1:"Yes. Your private key is stored only in a local .env file on your machine, with chmod 600 permissions. iEarn.Bot servers never receive, see, or store your key. SkillPay billing uses your wallet address as a user ID — no signup, no KYC.",
@@ -569,6 +666,10 @@ const T = {
     t3_f4:"自接LLM-API（节省成本）", t3_f5:"完整风控套件", t3_f6:"优先支持 + 早期功能",
     t3_note:"需自行提供LLM-API Key", t3_btn:"购买 Max →",
     inst_lbl:"快速开始", inst_h2:"60 秒内完成安装", inst_sub:"支持 macOS 和 Linux，需要 Python 3.11+。",
+    dl_lbl:"下载", dl_h2:"获取 iEarn.Bot", dl_sub:"选择你的平台，本地部署，永久免费运行。",
+    dl_mac:"macOS", dl_mac_d:"Apple Silicon · Intel", dl_win:"Windows", dl_win_d:"Windows 10/11 · x64",
+    dl_ext:"浏览器插件", dl_ext_d:"Chrome · Edge", dl_skill:"OpenClaw Skill", dl_skill_d:"AI 智能体插件",
+    dl_ready:"✓ 可下载", dl_soon:"即将上线",
     inst_warn:"⚠️ 只投入你能承受损失的资金。这是实验性软件，请自行研究（DYOR）。",
     faq_lbl:"常见问题", faq_h2:"常见问题解答",
     q1:"我的私钥安全吗？", a1:"安全。私钥仅存储在你本地机器的 .env 文件中，权限为 chmod 600。iEarn.Bot 服务器从不接收、查看或存储你的密钥。SkillPay 使用你的钱包地址作为用户 ID，无需注册，无需 KYC。",
@@ -621,6 +722,10 @@ const T = {
     t3_f4:"独自LLM APIキーを使用", t3_f5:"完全リスク管理スイート", t3_f6:"優先サポート + 早期機能",
     t3_note:"独自のLLM APIキーが必要", t3_btn:"Max を購入 →",
     inst_lbl:"始め方", inst_h2:"60秒でインストール", inst_sub:"macOSとLinuxに対応。Python 3.11+が必要。",
+    dl_lbl:"ダウンロード", dl_h2:"iEarn.Botを入手", dl_sub:"プラットフォームを選んでローカルにデプロイ。永久無料で稼働。",
+    dl_mac:"macOS", dl_mac_d:"Apple Silicon · Intel", dl_win:"Windows", dl_win_d:"Windows 10/11 · x64",
+    dl_ext:"ブラウザ拡張", dl_ext_d:"Chrome · Edge", dl_skill:"OpenClaw Skill", dl_skill_d:"AIエージェントプラグイン",
+    dl_ready:"✓ 準備完了", dl_soon:"近日公開",
     inst_warn:"⚠️ 失っても構わない資金だけを入金してください。これは実験的なソフトウェアです。自己責任で（DYOR）。",
     faq_lbl:"よくある質問", faq_h2:"よくある質問",
     q1:"秘密鍵は安全ですか？", a1:"はい。秘密鍵はあなたのマシン上のローカル.envファイルにのみ保存され、chmod 600の権限が設定されています。iEarn.Botのサーバーはあなたのキーを受信・閲覧・保存することはありません。SkillPayの課金はウォレットアドレスをユーザーIDとして使用するため、登録もKYCも不要です。",
